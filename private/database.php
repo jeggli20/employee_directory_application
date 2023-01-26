@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once("db_credentials.php");
 
 function db_connect(): object {
     $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
