@@ -2,13 +2,7 @@
 
 <?php
 $php_title = "Company Name";
-$search = "";
 $employees = Employee::select_all();
-
-if(post_request()) {
-    $search = $_POST["search"];
-    $employees = Employee::select_name($search);
-}
 ?>
 
 <!DOCTYPE html>
@@ -18,17 +12,22 @@ if(post_request()) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $page_title; ?></title>
+        <script defer src="scripts/public.js"></script>
     </head>
     <body>
-        <form action="<?php echo url_for("/index.php"); ?>" method="POST">
-            <input id="searchbar" type="search" name="search" placeholder="Search..." value="<?php echo $search; ?>" />
-            <button type="submit">Go</button>
-        </form>
+        <div id="search">
+            <label for="sort">Sort:</label>
+            <select id="sort" name="sort">
+                <option value="a-z">A-Z</option>
+                <option value="z-a">Z-A</option>
+            </select>
+            <input id="searchbar" type="search" name="search" placeholder="Search..." />
+        </div>
         <div class="employee_list">
             <ul>
                 <?php
                 foreach($employees as $employee) {
-                    echo "<a href='#'><li>" . $employee->full_name() . "</li></a>";
+                    echo "<a href='#'><li class='employee'>" . $employee->full_name() . "</li></a>";
                 }
                 ?>
             </ul>

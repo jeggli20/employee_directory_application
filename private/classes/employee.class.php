@@ -23,15 +23,5 @@ class Employee extends DatabaseObject {
         $full_name = $this->first_name . " " . $this->last_name;
         return $full_name;
     }
-
-    public static function select_name(string $value): array {
-        $sql = "SELECT * FROM " . static::$table . " ";
-        $sql .= "WHERE first_name ";
-        $sql .= "LIKE '" . self::$database->escape_string($value) . "%' ";
-        $sql .= "OR last_name ";
-        $sql .= "LIKE '" . self::$database->escape_string($value) . "%'";
-        $result = self::sql_object_array($sql);
-        return $result;
-    }
 }
 ?>
