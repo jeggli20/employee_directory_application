@@ -1,0 +1,123 @@
+body {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  background-color: #fff;
+}
+
+/* =================== Header ============= */
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: #4d4d4d;
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 80%;
+  align-items: center;
+}
+
+.heading h1,
+.heading h2,
+.heading span,
+.user-text span {
+  color: #fff;
+  text-shadow: 2px 2px #000;
+}
+
+.heading h1,
+.heading h2 {
+  margin: 0 0.5rem;
+}
+
+.heading h1,
+.heading span {
+  font-size: 2.5rem;
+}
+
+.heading h2 {
+  padding-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.heading span {
+  margin-bottom: 0.5rem;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 20%;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+}
+
+.user-text span {
+  text-align: end;
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+}
+
+/* =================== Search ============= */
+.search {
+  flex-basis: 20%;
+  border: ridge 5px #4d4d4d;
+  border-top: none;
+  min-height: 75vh;
+}
+
+.search-tools {
+  margin: 0.5rem;
+}
+
+.employee-list {
+  margin: 0;
+  padding: 0;
+}
+
+.list-photo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.employee-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.employee {
+  list-style-type: none;
+  width: 100%;
+  background-color: #737373;
+  border: ridge 2px #737373;
+}
+
+/* =================== Employee Info ============= */
+.employee-info {
+  flex-basis: 80%;
+}
+
+.employee-photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
