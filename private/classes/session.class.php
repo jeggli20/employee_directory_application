@@ -54,5 +54,9 @@ class Session {
             $this->last_login = $_SESSION["last_login"];
         }
     }
+
+    public function compare_id(string $id): bool {
+        return $id === (string) $this->employee_id;
+    }
 }
 ?>

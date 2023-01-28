@@ -40,11 +40,15 @@ class Employee extends DatabaseObject {
         return $full_name;
     }
 
-    public static function select_by_username(string $username): object {
+    public static function select_by_username(string $username): ?object {
         $sql = "SELECT * FROM " . self::$table . " ";
         $sql .= "WHERE username='" . self::$database->escape_string($username) . "'";
         $result = self::sql_object_array($sql);
-        return array_shift($result);
+        if(!empty($result)) {
+            return array_shift($result);
+        } else {
+            return NULL;
+        }
     }
 
     public static function select_by_id(string $id): object {

@@ -9,6 +9,7 @@ define("WWW_ROOT", $doc_root);
 
 require_once("database.php");
 require_once("functions.php");
+require_once("validation.php");
 
 function autoload($class) {
     if(preg_match("/\A\w+\Z/", $class)) {

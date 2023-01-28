@@ -1,11 +1,14 @@
 <?php require_once("../private/initialize.php"); ?>
 
 <?php
-$php_title = "Company Name";
+$page_title = "Company Directory";
 $employees = Employee::select_all();
 
 $id = $_GET["id"] ?? "1";
-
+if($id == NULL) {
+    redirect_to("/index.php?id=1");
+}
+ 
 $employee_info = Employee::select_by_id($id);
 $username = $_SESSION["username"] ?? "";
 $user = Employee::select_by_username($username)->first_name;
@@ -18,7 +21,7 @@ $user = Employee::select_by_username($username)->first_name;
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $page_title; ?></title>
-        <script defer src="scripts/public.js"></script>
+        <script defer src="scripts/index.js"></script>
         <link href="./styles/index.css" rel="stylesheet" />
     </head>
     <body>
@@ -50,7 +53,11 @@ $user = Employee::select_by_username($username)->first_name;
                     <ul class="employee-list">
                         <?php
                         foreach($employees as $employee) {
-                            echo "<a class='employee-link'  href='" . url_for("/index.php?id=" . $employee->id) . "'><li class='employee'><img class='list-photo' src='./images/placeholder_profile.png' alt='Employee photo' />" . html($employee->full_name()) . "</li></a>";
+                            echo "<a class='employee-link'  href='" . url_for("/index.php?id=" . $employee->id) . "'><li class='employee'><img class='list-photo' src='./images/placeholder_profile.png' alt='Employee photo' />" . html($employee->full_name());
+                            if($session->compare_id($employee->id)) {
+                                echo "<span class='user-indicator'>You</span>";
+                            }
+                            echo "</li></a>";
                         }
                         ?>
                     </ul>
@@ -71,7 +78,7 @@ $user = Employee::select_by_username($username)->first_name;
                     </div>
                     <div class="extra-info">
                         <button class="extra-btn" type="button">Title: <?php echo html($employee_info->id_to_string("job")); ?></button>
-                        <a class="extra-btn" href="#">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
+                        <a class="extra-btn" href="<?php echo url_for('/index.php?id=' . $employee_info->supervisor_id); ?>">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
                     </div>
                     <div class="extra-info">
                         <a class="extra-btn" href="tel:1111111111">Phone: <?php echo html($employee_info->phone_number); ?></a>
