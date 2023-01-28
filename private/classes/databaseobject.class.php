@@ -15,7 +15,21 @@ class DatabaseObject {
         return $result;
     }
 
-    protected static function sql_object_array(string $sql) {
+    protected static function sql_assoc_array(string $sql): array {
+        $result = self::$database->query($sql);
+        if(!$result) {
+            exit("Database query failed");
+        }
+
+        $array = [];
+        while($record = $result->fetch_assoc()) {
+            $array[] = $record;
+        }
+
+        return $array;
+    }
+
+    protected static function sql_object_array(string $sql): array {
         $result = self::$database->query($sql);
         if(!$result) {
             exit("Database query failed");

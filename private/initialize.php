@@ -20,4 +20,6 @@ spl_autoload_register("autoload");
 
 $database = db_connect();
 DatabaseObject::setup_database($database);
+
+$session = new Session;
 ?>

@@ -3,6 +3,12 @@
 <?php
 $php_title = "Company Name";
 $employees = Employee::select_all();
+
+$id = $_GET["id"] ?? "1";
+
+$employee_info = Employee::select_by_id($id);
+$username = $_SESSION["username"] ?? "";
+$user = Employee::select_by_username($username)->first_name;
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +19,7 @@ $employees = Employee::select_all();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $page_title; ?></title>
         <script defer src="scripts/public.js"></script>
-        <link href="./styles/public.css" rel="stylesheet" />
+        <link href="./styles/index.css" rel="stylesheet" />
     </head>
     <body>
         <header>
@@ -24,10 +30,10 @@ $employees = Employee::select_all();
             </div>
             <div class="user">
                 <div class="user-text">
-                    <span>Welcome, <?php echo "Employee First Name"; ?></span>
-                    <span>Logout</span>
+                    <span>Welcome, <?php echo html($user); ?></span>
+                    <a href="<?php echo url_for("/logout.php"); ?>">Logout</a>
                 </div>
-                <img class="user-photo" src="./images/placeholder-profile.png" alt="Employee photo" />
+                <img class="user-photo" src="./images/placeholder_profile.png" alt="Employee photo" />
             </div>
         </header>
         <main>
@@ -44,7 +50,7 @@ $employees = Employee::select_all();
                     <ul class="employee-list">
                         <?php
                         foreach($employees as $employee) {
-                            echo "<a class='employee-link'  href='#'><li class='employee'><img class='list-photo' src='./images/placeholder-profile.png' alt='Employee photo' />" . $employee->full_name() . "</li></a>";
+                            echo "<a class='employee-link'  href='" . url_for("/index.php?id=" . $employee->id) . "'><li class='employee'><img class='list-photo' src='./images/placeholder_profile.png' alt='Employee photo' />" . html($employee->full_name()) . "</li></a>";
                         }
                         ?>
                     </ul>
@@ -53,23 +59,23 @@ $employees = Employee::select_all();
             <div class="employee-info">
                 <div class="information">
                     <div class="basic-info">
-                        <img class="employee-photo" src="./images/placeholder-profile.png" alt="Employee photo" />
+                        <img class="employee-photo" src="./images/placeholder_profile.png" alt="Employee photo" />
                         <div>
                             <ul class="basic-list">
-                                <li class="list-item">Name: <?php echo "James Tanner"; ?></li>
-                                <li class="list-item">Birthday: <?php echo "Jun 15th"; ?></li>
-                                <li class="list-item">First Employed: <?php echo "Dec 12th, 2012"; ?></li>
-                                <li class="list-item">Time Employed: <?php echo "10 years 2 months 14 days"; ?></li>
+                                <li class="list-item">Name: <?php echo html($employee_info->full_name()); ?></li>
+                                <li class="list-item">Birthday: <?php echo html($employee_info->birthday); ?></li>
+                                <li class="list-item">First Employed: <?php echo html($employee_info->date_started); ?></li>
+                                <li class="list-item">Time Employed: <?php echo html($employee_info->time_employed_days); ?></li>
                             </ul>
                         </div>
                     </div>
                     <div class="extra-info">
-                        <button class="extra-btn" type="button">Title: <?php echo "Engineer"; ?></button>
-                        <a class="extra-btn" href="#">Reports To: <?php echo "James Tanner"; ?></a>
+                        <button class="extra-btn" type="button">Title: <?php echo html($employee_info->id_to_string("job")); ?></button>
+                        <a class="extra-btn" href="#">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
                     </div>
                     <div class="extra-info">
-                        <a class="extra-btn" href="tel:1111111111">Phone: <?php echo "111-111-1111"; ?></a>
-                        <a class="extra-btn" href="mailto:example@gmail.com">Email: <?php echo "example@gmail.com"; ?></a>
+                        <a class="extra-btn" href="tel:1111111111">Phone: <?php echo html($employee_info->phone_number); ?></a>
+                        <a class="extra-btn" href="mailto:example@gmail.com">Email: <?php echo html($employee_info->email); ?></a>
                     </div>
                 </div>
                 <div></div>
