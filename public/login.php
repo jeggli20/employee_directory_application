@@ -22,11 +22,11 @@ if(post_request()) {
     }
     if(empty($errors)) {
         $user = Employee::select_by_username($username);
-        if($user !== NULL) {
+        if($user !== NULL && $user->verify_password($password)) {
             $session->login($user);
             redirect_to("/index.php?id=" . url($user->id));
         } else {
-            $errors[] ="Something went wrong. Try again";
+            $errors[] ="Something went wrong. Check your credentials and try again";
         }
     }
 
@@ -41,12 +41,12 @@ if(post_request()) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $page_title; ?></title>
         <script defer src="scripts/login.js"></script>
-        <link href="./styles/login.css" rel="stylesheet" />
+        <link href="./stylesheets/login.css" rel="stylesheet" />
     </head>
     <body>
         <main>
             <header>
-                <img src="./images/placeholder_logo.png" alt="Company Logo" />
+                <img src="<?php echo url_for("/images/placeholder_logo.png"); ?>" alt="Company Logo" />
                 <h2>Employee Directory Login</h2>
             </header>
             <?php

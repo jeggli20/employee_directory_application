@@ -42,6 +42,14 @@ img {
   height: 100px;
 }
 
+.user-text a:link {
+  color: #fff;
+}
+
+.user-text a:visited {
+  color: #fff;
+}
+
 .login-form {
   justify-content: center;
   align-items: center;
@@ -66,7 +74,7 @@ input {
 }
 
 button {
-  margin: 0.5rem;
+  margin: 0.5rem 0.5rem 1.5rem 0.5rem;
   width: 100px;
   border-radius: 20px;
 }

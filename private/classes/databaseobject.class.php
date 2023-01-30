@@ -4,6 +4,7 @@ declare(strict_types=1);
 class DatabaseObject {
     protected static $database;
     protected static $table = "";
+    protected static $columns = [];
 
     public static function setup_database(object $database) {
         self::$database = $database;
@@ -54,5 +55,31 @@ class DatabaseObject {
 
         return $object;
     } 
+
+    protected function attributes(): array {
+        $attributes = [];
+        foreach(static::$columns as $column) {
+            if($column === "id") {
+                continue;
+            }
+            $attributes[$column] = self::$database->escape_string($this->$column);
+        }
+        return $attributes;
+    }
+
+    public function insert_into(): bool {
+        $attributes = $this->attributes();
+        $sql = "INSERT INTO " . static::$table . " (";
+        $sql .= join(", ", array_keys($attributes));
+        $sql .= ") VALUES ('";
+        $sql .= join("', '", array_values($attributes));
+        $sql .= "')";
+        $result = self::$database->query($sql);
+        if(!$result) {
+            
+            exit(print_r($sql));
+        }
+        return true;
+    }
 }
 ?>

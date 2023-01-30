@@ -4,7 +4,8 @@ declare(strict_types=1);
 class Session {
     private const LOGIN_MAX_DURATION = 60*60*24;
     public $username;
-
+    public $job_id;
+    
     private $employee_id;
     private $last_login;
 
@@ -19,6 +20,7 @@ class Session {
             session_regenerate_id();
             $this->username = $_SESSION["username"] = $employee->username;
             $this->employee_id = $_SESSION["employee_id"] = $employee->id;
+            $this->job_id = $_SESSION["job_id"] = $employee->job_id;
             $this->last_login = $_SESSION["last_login"] = time();
         }
     }
@@ -26,9 +28,11 @@ class Session {
     public function logout(): bool {
         unset($_SESSION["username"]);
         unset($_SESSION["employee_id"]);
+        unset($_SESSION["job_id"]);
         unset($_SESSION["last_login"]);
         unset($this->username);
         unset($this->employee_id);
+        unset($this->job_id);
         unset($this->last_login);
         return true;
     }
@@ -51,6 +55,7 @@ class Session {
         if(isset($_SESSION["employee_id"])) {
             $this->username = $_SESSION["username"];
             $this->employee_id = $_SESSION["employee_id"];
+            $this->job_id = $_SESSION["job_id"];
             $this->last_login = $_SESSION["last_login"];
         }
     }
@@ -58,5 +63,6 @@ class Session {
     public function compare_id(string $id): bool {
         return $id === (string) $this->employee_id;
     }
+
 }
 ?>

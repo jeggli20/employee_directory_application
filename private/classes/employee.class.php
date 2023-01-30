@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 class Employee extends DatabaseObject {
     protected static $table = "employees";
+    protected static $columns = ["id", "first_name", "last_name", "username", "hashed_password", "email", "birthday", "phone_number", "job_id", "supervisor_id", "date_started", "time_employed_days"];
+
     public $id;
     public $first_name;
     public $last_name;
@@ -56,6 +58,14 @@ class Employee extends DatabaseObject {
         $sql .= "WHERE id='" . self::$database->escape_string($id) . "'";
         $result = self::sql_object_array($sql);
         return array_shift($result);
+    }
+
+    public function verify_password(string $password): bool {
+        return password_verify($password, $this->hashed_password);
+    }
+
+    protected function set_hashed_password() {
+        $this->hashed_password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
     public function id_to_string(string $id_type): string {
