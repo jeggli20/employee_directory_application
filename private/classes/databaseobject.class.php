@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 class DatabaseObject {
+    public $errors = [];
+
     protected static $database;
     protected static $table = "";
     protected static $columns = [];
@@ -62,24 +64,37 @@ class DatabaseObject {
             if($column === "id") {
                 continue;
             }
-            $attributes[$column] = self::$database->escape_string($this->$column);
+            if($this->$column === "") {
+                $attributes[$column] = "NULL";
+            } else {
+                $attributes[$column] = "'" . self::$database->escape_string($this->$column) . "'";
+            }
         }
         return $attributes;
     }
 
+    protected function validate() {
+        $this->errors = [];
+
+        return $errors;
+    }
+
     public function insert_into(): bool {
+        $this->validate();
+        if(!empty($this->errors)) {
+            return false;
+        }
         $attributes = $this->attributes();
         $sql = "INSERT INTO " . static::$table . " (";
         $sql .= join(", ", array_keys($attributes));
-        $sql .= ") VALUES ('";
-        $sql .= join("', '", array_values($attributes));
-        $sql .= "')";
+        $sql .= ") VALUES (";
+        $sql .= join(", ", array_values($attributes));
+        $sql .= ")";
         $result = self::$database->query($sql);
         if(!$result) {
-            
             exit(print_r($sql));
         }
-        return true;
+        return $result;
     }
 }
 ?>

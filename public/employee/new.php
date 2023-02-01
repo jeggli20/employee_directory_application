@@ -2,36 +2,33 @@
 
 <?php
 $page_title = "Company Directory - New Employee";
-$errors = [];
 
 if(post_request()) {
     $form_info = $_POST["employee"] ?? [];
+    $employee = new Employee($form_info);
+    $result = $employee->insert_into();
 
-    //! TODO validation!!!
-    if(empty($errors)) {
-        $args = $_POST["employee"];
-        $new_emp = new Employee($args);
-        $result = $new_emp->insert_into();
-        if($result) {
-            $new_id = $new_emp->id;
-            redirect_to("/employee/show.php?id=" . $new_id);
-        }
+    if($result) {
+        $new_id = $new_emp->id;
+        redirect_to("/employee/show.php?id=" . $new_id);
     }
 }
-
-$id = $_GET["id"] ?? "1";
-if($id == NULL) {
-    redirect_to("/index.php?id=1");
-}
- 
-$employee_info = Employee::select_by_id($id);
-$username = $_SESSION["username"] ?? "";
-$user = Employee::select_by_username($username)->first_name;
 ?>
 
 <?php include_once(SHARED_PATH . "/public_header.php"); ?>
 
 <main>
+    <?php
+    if(!empty($employee->errors)) {
+        echo "<div class='errors-container'>";
+        echo "<ul class='errors-list'>";
+        foreach($employee->errors as $error) {
+            echo "<li class='error'>" . $error . "</li>";
+        }
+        echo "</ul>";
+        echo "</div>";
+    }
+    ?>
     <div class="crud-content">
         <div class="crud-heading">
             <a href="<?php echo url_for("/index.php"); ?>">&laquo; Back</a>

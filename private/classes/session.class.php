@@ -64,5 +64,9 @@ class Session {
         return $id === (string) $this->employee_id;
     }
 
+    public function get_id(): string {
+        return $this->employee_id;
+    }
+
 }
 ?>

@@ -151,3 +151,19 @@ header {
   display: flex;
   flex-direction: column;
 }
+
+.errors-container {
+  margin: 0.25rem 1rem;
+  background-color: hsl(0, 100%, 90%);
+  border-radius: 20px;
+}
+
+.error {
+  color: hsl(0, 100%, 50%);
+}
+
+.invalid {
+  background-color: hsl(0, 100%, 90%);
+  color: #000;
+  border: 2px solid hsl(0, 100%, 50%);
+}

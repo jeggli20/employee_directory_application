@@ -10,8 +10,6 @@ if($id == NULL) {
 }
  
 $employee_info = Employee::select_by_id($id);
-$username = $_SESSION["username"] ?? "";
-$user = Employee::select_by_username($username)->first_name;
 ?>
 
 <?php include_once(SHARED_PATH . "/public_header.php"); ?>
@@ -60,7 +58,7 @@ $user = Employee::select_by_username($username)->first_name;
             </div>
             <div class="extra-info">
                 <button class="extra-btn" type="button">Title: <?php echo html($employee_info->id_to_string("job")); ?></button>
-                <a class="extra-btn" href="<?php echo url_for('/index.php?id=' . $employee_info->supervisor_id); ?>">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
+                <a class="extra-btn" href="<?php echo url_for('/index.php?id=' . ($employee_info->supervisor_id ?? $employee_info->id)); ?>">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
             </div>
             <div class="extra-info">
                 <a class="extra-btn" href="tel:1111111111">Phone: <?php echo html($employee_info->phone_number); ?></a>

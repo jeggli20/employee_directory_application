@@ -24,4 +24,9 @@ $database = db_connect();
 DatabaseObject::setup_database($database);
 
 $session = new Session;
+
+$username = $_SESSION["username"] ?? NULL;
+if($username !== NULL) {
+    $user = Employee::select_by_username($username)->first_name;
+}
 ?>
