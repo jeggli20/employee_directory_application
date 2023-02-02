@@ -40,7 +40,7 @@ include_once(SHARED_PATH . "/public_header.php");
     ?>
     <div class="crud-content">
         <div class="crud-heading">
-            <a href="<?php echo url_for("/index.php"); ?>">&laquo; Back</a>
+            <a href="<?php echo url_for("/index.php?id=" . url($id)); ?>">&laquo; Back</a>
             <h2>Edit Employee</h2>
         </div>
         <form action="<?php echo url_for("/employee/edit.php?id=" . url($id)); ?>" method="POST">

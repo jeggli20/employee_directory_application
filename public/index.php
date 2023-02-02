@@ -74,7 +74,7 @@ include_once(SHARED_PATH . "/public_header.php");
             if($session->job_id === "3") {
                 echo "<div>";
                 echo "<a type='button' href='" . url_for("/employee/edit.php?id=" . url($employee_info->id)) . "'>Edit Employee</a>";
-                echo "<a type='button' href='" . url_for("/employee/delete.php") . "'>Delete Employee</a>";
+                echo "<a type='button' href='" . url_for("/employee/delete.php?id=" . url($employee_info->id)) . "'>Delete Employee</a>";
                 echo "</div>";
             }
             ?>

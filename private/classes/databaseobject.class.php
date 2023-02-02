@@ -126,5 +126,13 @@ class DatabaseObject {
         }
         return $result;
     }
+
+    public function delete(): bool {
+        $sql = "DELETE FROM " . static::$table . " ";
+        $sql .= "WHERE id=" . $this->id . " ";
+        $sql .= "LIMIT 1";
+        $result = self::$database->query($sql);
+        return $result;
+    }
 }
 ?>
