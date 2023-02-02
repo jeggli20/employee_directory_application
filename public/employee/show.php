@@ -30,7 +30,7 @@ include_once(SHARED_PATH . "/public_header.php");
     ?>
     <div class="crud-content">
         <div class="crud-heading">
-            <a href="<?php echo url_for("/index.php"); ?>">&laquo; Back</a>
+            <a href="<?php echo url_for("/index.php?id=" . url($employee_info->id)); ?>">&laquo; Back</a>
             <h2>Employee Information</h2>
         </div>
         <ul>

@@ -3,6 +3,11 @@
 <?php
 $id = $_GET["id"];
 $employee = Employee::select_by_id($id);
+print_r($employee);
+echo $employee->date_started;
+echo gettype($employee->date_started);
+echo $employee->birthday;
+echo gettype($employee->birthday);
 if($employee === false) {
     redirect_to("/index.php?id=1");
 }

@@ -13,9 +13,9 @@ $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
 <?php
 if($url_string === "new") {
     echo "<label for='password'>Password:</label>";
-    echo "<input type='password' name='employee[password]' id='password' placeholder='Password' value='<?php echo $employee->password ?? \"\"; ?>' />";
+    echo "<input type='password' name='employee[password]' id='password' placeholder='Password' />";
     echo "<label for='c_password'>Confirm Password:</label>";
-    echo "<input type='password' name='employee[c_password]' id='c_password' placeholder='Confirm Password' value='<?php echo $employee->c_password ?? \"\" ?>' />";
+    echo "<input type='password' name='employee[c_password]' id='c_password' placeholder='Confirm Password' />";
 } else {
     echo "<button id='password-btn' type='button'>Change Password?</button>";
     echo "<label for='password' class='edit-password'>Password:</label>";
@@ -37,7 +37,11 @@ if($url_string === "new") {
 <select name="employee[job_id]" id="job_id">
     <?php 
     foreach($jobs as $job) {
-        echo "<option value='" . $job->id . "'>" . $job->job_title . "</option>";
+        if($job->id === $employee->job_id) {
+            echo "<option value='" . $job->id . "' selected>" . $job->job_title . "</option>";
+        } else {
+            echo "<option value='" . $job->id . "'>" . $job->job_title . "</option>";
+        }
     }
     ?>
 </select>
@@ -45,10 +49,14 @@ if($url_string === "new") {
 <select name="employee[supervisor_id]" id="supervisor_id">
     <option value="">N/A</option>
     <?php 
-    foreach($employees as $employee) {
-        echo "<option value='" . $employee->id . "'>" . $employee->full_name() . "</option>";
+    foreach($employees as $emp) {
+        if($emp->id === $employee->supervisor_id) {
+            echo "<option value='" . $emp->id . "' selected>" . $emp->full_name() . "</option>";
+        } else {
+            echo "<option value='" . $emp->id . "'>" . $emp->full_name() . "</option>";
+        }
     }
     ?>
 </select>
 <label for="date_started">Date Started:</label>
-<input type="date" name="employee[date_started]" id="date_started" value="<?php echo $employee->date_started ?? "" ?>" />  
+<input type="date" name="employee[date_started]" id="date_started" value="<?php echo (string) $employee->date_started ?? ""; ?>" />  

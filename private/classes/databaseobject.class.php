@@ -12,8 +12,11 @@ class DatabaseObject {
         self::$database = $database;
     }
 
-    public static function select_all(): array {
+    public static function select_all(array $options = []): array {
         $sql = "SELECT * FROM " . static::$table;
+        if(isset($options["sort"])) {
+            $sql .= " ORDER BY " . $options["sort"];
+        }
         $result = self::sql_object_array($sql);
         return $result;
     }
@@ -64,7 +67,7 @@ class DatabaseObject {
             if($column === "id") {
                 continue;
             }
-            if($this->$column === "") {
+            if($this->$column === "" || $this->$column === NULL) {
                 $attributes[$column] = "NULL";
             } else {
                 $attributes[$column] = "'" . self::$database->escape_string($this->$column) . "'";

@@ -90,9 +90,14 @@ class Employee extends DatabaseObject {
         }
     }
 
-    private function format_phone_number(string $phone_number): string {
+    public function phone_number_formatter(): array {
         $exclusions = ["(", ")", "-", " "];
-        return str_replace($exclusions, "", $phone_number);
+        $numbers = str_replace($exclusions, "", $this->phone_number); 
+        $set1 = substr($numbers, 0, 3);
+        $set2 = substr($numbers, 3, 3);
+        $set3 = substr($numbers, 6);
+        $display = "({$set1}) {$set2} - {$set3}";
+        return ["numbers" => $numbers, "display" => $display];
     }
 
     protected function date_array(string $date): array {
@@ -100,16 +105,45 @@ class Employee extends DatabaseObject {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);
-        $date = $month . "/" . $day . "/" . $year;
+        $date = "{$year}-{$month}-{$day}";
         return ["year"=>$year, "month"=>$month, "day"=>$day, "date"=>$date];
     }
 
-    private function days_worked(string $date_started) {
-        $now = time();
-        $your_date = strtotime($date_started);
-        $datediff = $now - $your_date;
+    private function days_worked(): ?string {
+        if($this->date_started){
+            $now = time();
+            $your_date = strtotime($this->date_started);
+            $datediff = $now - $your_date;
+    
+            return (string) floor($datediff / (60 * 60 * 24));
+        } else {
+            return NULL;
+        }
+    }
 
-        return (string) floor($datediff / (60 * 60 * 24));
+    public function date_formatter(string $option): string {
+        if($option === "time_employed") {
+            if($this->time_employed_days === NULL) {
+                return "N/A";
+            }
+            $time_employed = $this->time_employed_days;
+            $years = floor($time_employed / 365);
+            $months = floor(($time_employed % 365) / 12);
+            $days = (($time_employed % 365) % 12) + 1;
+            return "{$years} years {$months} months {$days} days";
+        } elseif ($option === "birthday") {
+            if($this->birthday === NULL) {
+                return "N/A";
+            }
+            $date_object = date_create($this->birthday);
+            return date_format($date_object, "M j");
+        } elseif ($option === "date_started") {
+            if($this->date_started === NULL) {
+                return "N/A";
+            }
+            $date_object = date_create($this->date_started);
+            return date_format($date_object, "M j, Y");
+        }
     }
 
     protected function validate() {
@@ -165,7 +199,7 @@ class Employee extends DatabaseObject {
             $this->errors[] = "Email must be a valid format.";
         }
         
-        $phone_number = $this->format_phone_number($this->phone_number);
+        $phone_number = $this->phone_number_formatter()["numbers"];
         if(is_blank($phone_number)) {
             $this->errors[] = "Phone number cannot be blank";
         } elseif (!has_length_exactly($phone_number, 10)) {
@@ -189,17 +223,18 @@ class Employee extends DatabaseObject {
 
     public function insert_into(): bool {
         $this->set_hashed_password();
-        $this->time_employed_days = $this->days_worked($this->date_started);
+        $this->time_employed_days = $this->days_worked();
         return parent::insert_into();
     }
 
     public function update(): bool {
-    if($this->password !== "") {
-      $this->set_hashed_password();
-    } else {
-      $this->password_required = false;
-    }
-    return parent::update();
+        if($this->password !== "") {
+        $this->set_hashed_password();
+        } else {
+        $this->password_required = false;
+        }
+        $this->time_employed_days = $this->days_worked();
+        return parent::update();
     }
 }
 ?>

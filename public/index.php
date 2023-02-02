@@ -1,7 +1,7 @@
 <?php require_once("../private/initialize.php"); ?>
 
 <?php
-$employees = Employee::select_all();
+$employees = Employee::select_all(["sort" => "first_name"]);
 
 $id = $_GET["id"] ?? "1";
 if($id == NULL) {
@@ -54,9 +54,9 @@ include_once(SHARED_PATH . "/public_header.php");
                 <div>
                     <ul class="basic-list">
                         <li class="list-item">Name: <?php echo html($employee_info->full_name()); ?></li>
-                        <li class="list-item">Birthday: <?php echo html($employee_info->birthday); ?></li>
-                        <li class="list-item">First Employed: <?php echo html($employee_info->date_started); ?></li>
-                        <li class="list-item">Time Employed: <?php echo html($employee_info->time_employed_days); ?></li>
+                        <li class="list-item">Birthday: <?php echo html($employee_info->date_formatter("birthday")); ?></li>
+                        <li class="list-item">First Employed: <?php echo html($employee_info->date_formatter("date_started")); ?></li>
+                        <li class="list-item">Time Employed: <?php echo html($employee_info->date_formatter("time_employed")); ?></li>
                     </ul>
                 </div>
             </div>
@@ -65,7 +65,7 @@ include_once(SHARED_PATH . "/public_header.php");
                 <a class="extra-btn" href="<?php echo url_for('/index.php?id=' . ($employee_info->supervisor_id ?? $employee_info->id)); ?>">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
             </div>
             <div class="extra-info">
-                <a class="extra-btn" href="tel:1111111111">Phone: <?php echo html($employee_info->phone_number); ?></a>
+                <a class="extra-btn" href="tel:<?php echo $employee_info->phone_number_formatter()["numbers"]; ?>">Phone: <?php echo html($employee_info->phone_number_formatter()["display"]); ?></a>
                 <a class="extra-btn" href="mailto:example@gmail.com">Email: <?php echo html($employee_info->email); ?></a>
             </div>
         </div>
