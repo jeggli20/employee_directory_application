@@ -91,8 +91,8 @@ class DatabaseObject {
         $sql .= join(", ", array_values($attributes));
         $sql .= ")";
         $result = self::$database->query($sql);
-        if(!$result) {
-            exit(print_r($sql));
+        if($result) {
+            $this->id = self::$database->insert_id;
         }
         return $result;
     }

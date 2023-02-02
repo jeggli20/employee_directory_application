@@ -9,7 +9,7 @@ if(post_request()) {
     $result = $employee->insert_into();
 
     if($result) {
-        $new_id = $new_emp->id;
+        $new_id = $employee->id;
         redirect_to("/employee/show.php?id=" . $new_id);
     }
 }
