@@ -1,7 +1,6 @@
 <?php require_once("../private/initialize.php"); ?>
 
 <?php
-$page_title = "Company Directory";
 $employees = Employee::select_all();
 
 $id = $_GET["id"] ?? "1";
@@ -12,7 +11,12 @@ if($id == NULL) {
 $employee_info = Employee::select_by_id($id);
 ?>
 
-<?php include_once(SHARED_PATH . "/public_header.php"); ?>
+<?php
+$page_title = "Company Directory";
+$script_path = "/scripts/index.js";
+$stylesheet_path = "/stylesheets/index.css"; 
+include_once(SHARED_PATH . "/public_header.php"); 
+?>
 
 <main class="main-content">
     <div class="search">
@@ -69,7 +73,7 @@ $employee_info = Employee::select_by_id($id);
             <?php
             if($session->job_id === "3") {
                 echo "<div>";
-                echo "<a type='button' href='" . url_for("/employee/edit.php") . "'>Edit Employee</a>";
+                echo "<a type='button' href='" . url_for("/employee/edit.php?id=" . url($employee_info->id)) . "'>Edit Employee</a>";
                 echo "<a type='button' href='" . url_for("/employee/delete.php") . "'>Delete Employee</a>";
                 echo "</div>";
             }

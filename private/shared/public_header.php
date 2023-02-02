@@ -5,8 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $page_title; ?></title>
-        <script defer src="scripts/index.js"></script>
-        <link href="<?php echo url_for("/stylesheets/index.css"); ?>" rel="stylesheet" />
+        <script defer src="<?php echo url_for($script_path); ?>"></script>
+        <link href="<?php echo url_for($stylesheet_path); ?>" rel="stylesheet" />
     </head>
     <body>
         <header>

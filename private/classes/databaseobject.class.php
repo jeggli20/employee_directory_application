@@ -79,6 +79,14 @@ class DatabaseObject {
         return $errors;
     }
 
+    public function merge_attributes($args = []) {
+        foreach($args as $key => $value) {
+            if(property_exists($this, $key) && $value !== NULL) {
+                $this->$key = $value;
+            }
+        }
+    }
+
     public function insert_into(): bool {
         $this->validate();
         if(!empty($this->errors)) {
@@ -93,6 +101,28 @@ class DatabaseObject {
         $result = self::$database->query($sql);
         if($result) {
             $this->id = self::$database->insert_id;
+        }
+        return $result;
+    }
+
+    public function update(): bool {
+        $this->validate();
+        if(!empty($this->errors)) {
+            return false;
+        }
+
+        $attribute_pairs = [];
+        $attributes = $this->attributes();
+        foreach($attributes as $key => $value) {
+            $attribute_pairs[] = "{$key}={$value}";
+        } 
+        $sql = "UPDATE " . static::$table . " SET ";
+        $sql .= join(", ", array_values($attribute_pairs)) . " ";
+        $sql .= "WHERE id='" . self::$database->escape_string($this->id) . "' ";
+        $sql .= "LIMIT 1";
+        $result = self::$database->query($sql);
+        if(!$result) {
+            exit($sql);
         }
         return $result;
     }

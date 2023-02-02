@@ -1,11 +1,9 @@
 <?php require_once("../../private/initialize.php"); ?>
 
 <?php
-$page_title = "Company Directory - New Employee";
-
+$form_info = $_POST["employee"] ?? [];
+$employee = new Employee($form_info);
 if(post_request()) {
-    $form_info = $_POST["employee"] ?? [];
-    $employee = new Employee($form_info);
     $result = $employee->insert_into();
 
     if($result) {
@@ -15,7 +13,12 @@ if(post_request()) {
 }
 ?>
 
-<?php include_once(SHARED_PATH . "/public_header.php"); ?>
+<?php
+$page_title = "Company Directory - New Employee";
+$script_path = "";
+$stylesheet_path = "/stylesheets/index.css"; 
+include_once(SHARED_PATH . "/public_header.php"); 
+?>
 
 <main>
     <?php

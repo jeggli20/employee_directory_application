@@ -20,6 +20,8 @@ class Employee extends DatabaseObject {
     public $c_password;
     protected $hashed_password;
 
+    private $password_required = true;
+
     public function __construct($args = []) {
         $this->first_name = $args["first_name"] ?? "";
         $this->last_name = $args["last_name"] ?? "";
@@ -133,24 +135,26 @@ class Employee extends DatabaseObject {
             $this->errors[] = "Username already taken";
         }
 
-        if(is_blank($this->password)) {
-            $this->errors[] = "Password cannot be blank";
-        } elseif(!has_length($this->password, ["min"=>12])) {
-            $this->errors[] = "Password must be at least 12 characters long";
-        } elseif (!preg_match('/[A-Z]/', $this->password)) {
-            $this->errors[] = "Password must contain at least 1 uppercase letter";
-        } elseif (!preg_match('/[a-z]/', $this->password)) {
-            $this->errors[] = "Password must contain at least 1 lowercase letter";
-        } elseif (!preg_match('/[0-9]/', $this->password)) {
-            $this->errors[] = "Password must contain at least 1 number";
-        } elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->password)) {
-            $this->errors[] = "Password must contain at least 1 special character";
-        }
-
-        if(is_blank($this->c_password)) {
-            $this->errors[] = "Confirm Password cannot be blank";
-        } elseif($this->password !== $this->c_password) {
-            $this->errors[] = "Password and Confirm Password must match";
+        if($this->password_required) {
+            if(is_blank($this->password)) {
+                $this->errors[] = "Password cannot be blank";
+            } elseif(!has_length($this->password, ["min"=>12])) {
+                $this->errors[] = "Password must be at least 12 characters long";
+            } elseif (!preg_match('/[A-Z]/', $this->password)) {
+                $this->errors[] = "Password must contain at least 1 uppercase letter";
+            } elseif (!preg_match('/[a-z]/', $this->password)) {
+                $this->errors[] = "Password must contain at least 1 lowercase letter";
+            } elseif (!preg_match('/[0-9]/', $this->password)) {
+                $this->errors[] = "Password must contain at least 1 number";
+            } elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->password)) {
+                $this->errors[] = "Password must contain at least 1 special character";
+            }
+    
+            if(is_blank($this->c_password)) {
+                $this->errors[] = "Confirm Password cannot be blank";
+            } elseif($this->password !== $this->c_password) {
+                $this->errors[] = "Password and Confirm Password must match";
+            }
         }
 
         if(is_blank($this->email)) {
@@ -187,6 +191,15 @@ class Employee extends DatabaseObject {
         $this->set_hashed_password();
         $this->time_employed_days = $this->days_worked($this->date_started);
         return parent::insert_into();
+    }
+
+    public function update(): bool {
+    if($this->password !== "") {
+      $this->set_hashed_password();
+    } else {
+      $this->password_required = false;
+    }
+    return parent::update();
     }
 }
 ?>

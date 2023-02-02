@@ -1,8 +1,6 @@
 <?php require_once("../../private/initialize.php"); ?>
 
 <?php
-$page_title = "Company Directory - Show Employee";
-
 $id = $_GET["id"];
 if($id === NULL) {
     redirect_to("/index.php");
@@ -11,7 +9,12 @@ if($id === NULL) {
 $employee_info = Employee::select_by_id($id);
 ?>
 
-<?php include_once(SHARED_PATH . "/public_header.php"); ?>
+<?php
+$page_title = "Company Directory - Show Employee";
+$script_path = "";
+$stylesheet_path = "/stylesheets/index.css"; 
+include_once(SHARED_PATH . "/public_header.php"); 
+?>
 
 <main>
     <?php
