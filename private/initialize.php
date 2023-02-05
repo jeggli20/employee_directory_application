@@ -29,4 +29,5 @@ $username = $_SESSION["username"] ?? NULL;
 if($username !== NULL) {
     $user = Employee::select_by_username($username)->first_name;
 }
+$company_name = "Company Name";
 ?>

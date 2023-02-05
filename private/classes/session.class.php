@@ -38,13 +38,13 @@ class Session {
     }
 
     public function is_logged_in(): bool {
-        return isset($this->employee_id) && recent_login();
+        return isset($this->employee_id) && $this->recent_login();
     }
 
     private function recent_login(): bool {
         if(!isset($this->employee_id)) {
             return false;
-        } elseif (($this->last_login + LOGIN_MAX_DURATION) < time()) {
+        } elseif (($this->last_login + self::LOGIN_MAX_DURATION) < time()) {
             return false;
         } else {
             return true;
@@ -68,5 +68,10 @@ class Session {
         return $this->employee_id;
     }
 
+    public function require_login() {
+        if(!$this->is_logged_in()) {
+            redirect_to("/login.php");
+        }
+    }
 }
 ?>

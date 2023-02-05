@@ -4,7 +4,7 @@ main,
   flex-direction: column;
 }
 
-header,
+.login-header,
 .input-group {
   display: flex;
   flex-direction: row;
@@ -16,16 +16,7 @@ h2,
   color: #fff;
 }
 
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #e6e6e6;
-}
-
-main {
+.container {
   width: 500px;
   min-height: 260px;
   background-color: #737373;
@@ -33,13 +24,20 @@ main {
   border-radius: 20px;
 }
 
-h2 {
-  font-size: 1.8rem;
+main {
+  align-items: center;
+  justify-content: center;
 }
 
-img {
-  width: 100px;
-  height: 100px;
+h2 {
+  font-size: 1.6rem;
+  font-family: "Playfair Display SC", serif;
+}
+
+.logo {
+  margin: 0.5rem;
+  width: 75px;
+  height: 75px;
 }
 
 .user-text a:link {
@@ -71,26 +69,4 @@ input {
   border: 2px solid #000;
   border-radius: 20px;
   padding: 0 1rem;
-}
-
-button {
-  margin: 0.5rem 0.5rem 1.5rem 0.5rem;
-  width: 100px;
-  border-radius: 20px;
-}
-
-.errors-container {
-  margin: 0.25rem 1rem;
-  background-color: hsl(0, 100%, 90%);
-  border-radius: 20px;
-}
-
-.error {
-  color: hsl(0, 100%, 50%);
-}
-
-.invalid {
-  background-color: hsl(0, 100%, 90%);
-  color: #000;
-  border: 2px solid hsl(0, 100%, 50%);
 }

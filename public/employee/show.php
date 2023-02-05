@@ -1,4 +1,8 @@
-<?php require_once("../../private/initialize.php"); ?>
+<?php 
+require_once("../../private/initialize.php"); 
+require_login();
+$styles_path = "/stylesheets/crud.css";
+?>
 
 <?php
 $id = $_GET["id"];
@@ -10,10 +14,8 @@ $employee_info = Employee::select_by_id($id);
 ?>
 
 <?php
-$page_title = "Company Directory - Show Employee";
-$script_path = "";
-$stylesheet_path = "/stylesheets/index.css"; 
-include_once(SHARED_PATH . "/public_header.php"); 
+$page_title = "Company Directory - Show Employee"; 
+include_once(SHARED_PATH . "/header.php"); 
 ?>
 
 <main>
@@ -30,22 +32,22 @@ include_once(SHARED_PATH . "/public_header.php");
     ?>
     <div class="crud-content">
         <div class="crud-heading">
-            <a href="<?php echo url_for("/index.php?id=" . url($employee_info->id)); ?>">&laquo; Back</a>
+            <a class="back-link" href="<?php echo url_for("/index.php?id=" . url($employee_info->id)); ?>">&laquo; Back</a>
             <h2>Employee Information</h2>
+            <div class="filler"></div> 
         </div>
-        <ul>
-            <li>First Name: <?php echo $employee_info->first_name; ?></li>
-            <li>Last Name: <?php echo $employee_info->last_name; ?></li>
-            <li>Username: <?php echo $employee_info->username; ?></li>
-            <li>Email: <?php echo $employee_info->email; ?></li>
-            <li>Birthday: <?php echo $employee_info->birthday; ?></li>
-            <li>Phone Number: <?php echo $employee_info->phone_number; ?></li>
-            <li>Job Title: <?php echo $employee_info->id_to_string("job"); ?></li>
-            <li>Supervisor: <?php echo $employee_info->id_to_string("supervisor"); ?></li>
-            <li>Date Started: <?php echo $employee_info->date_started; ?></li>
-            <li>Time Employed (Days): <?php echo $employee_info->time_employed_days; ?></li>
+        <ul class="show-list">
+            <li class="show-item">First Name:<span class="info"><?php echo $employee_info->first_name; ?></span></li>
+            <li class="show-item">Last Name:<span class="info"><?php echo $employee_info->last_name; ?></span></li>
+            <li class="show-item">Username:<span class="info"><?php echo $employee_info->username; ?></span></li>
+            <li class="show-item">Email:<span class="info"><?php echo $employee_info->email; ?></span></li>
+            <li class="show-item">Birthday:<span class="info"><?php echo $employee_info->date_formatter("birthday"); ?></span></li>
+            <li class="show-item">Phone Number:<span class="info"><?php echo $employee_info->phone_number_formatter()["display"]; ?></span></li>
+            <li class="show-item">Job Title:<span class="info"><?php echo $employee_info->id_to_string("job"); ?></span></li>
+            <li class="show-item">Supervisor:<span class="info"><?php echo $employee_info->id_to_string("supervisor"); ?></span></li>
+            <li class="show-item">Date Started:<span class="info"><?php echo $employee_info->date_formatter("date_started"); ?></span></li>
         </ul>
     </div>
 </main>
 
-<?php include_once(SHARED_PATH . "/public_footer.php"); ?>
+<?php include_once(SHARED_PATH . "/footer.php"); ?>

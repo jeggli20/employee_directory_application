@@ -1,13 +1,13 @@
-<?php require_once("../../private/initialize.php"); ?>
+<?php 
+require_once("../../private/initialize.php"); 
+require_login();
+$script_path = "/scripts/edit.js";
+$styles_path = "/stylesheets/crud.css";
+?>
 
 <?php
 $id = $_GET["id"];
 $employee = Employee::select_by_id($id);
-print_r($employee);
-echo $employee->date_started;
-echo gettype($employee->date_started);
-echo $employee->birthday;
-echo gettype($employee->birthday);
 if($employee === false) {
     redirect_to("/index.php?id=1");
 }
@@ -26,33 +26,21 @@ if(post_request()) {
 
 <?php
 $page_title = "Company Directory - Edit Employee";
-$script_path = "/scripts/edit.js";
-$stylesheet_path = "/stylesheets/index.css"; 
-include_once(SHARED_PATH . "/public_header.php"); 
+include_once(SHARED_PATH . "/header.php"); 
 ?>
 
 <main>
-    <?php
-    if(!empty($employee->errors)) {
-        echo "<div class='errors-container'>";
-        echo "<ul class='errors-list'>";
-        foreach($employee->errors as $error) {
-            echo "<li class='error'>" . $error . "</li>";
-        }
-        echo "</ul>";
-        echo "</div>";
-    }
-    ?>
     <div class="crud-content">
         <div class="crud-heading">
-            <a href="<?php echo url_for("/index.php?id=" . url($id)); ?>">&laquo; Back</a>
+            <a class="back-link" href="<?php echo url_for("/index.php?id=" . url($id)); ?>">&laquo; Back</a>
             <h2>Edit Employee</h2>
+            <div class="filler"></div> 
         </div>
         <form action="<?php echo url_for("/employee/edit.php?id=" . url($id)); ?>" method="POST">
             <?php include_once(SHARED_PATH . "/form_fields.php"); ?>   
-            <button type="submit">Submit</button>           
+            <button class="btn" type="submit">Submit</button>           
         </form>
     </div>
 </main>
 
-<?php include_once(SHARED_PATH . "/public_footer.php"); ?>
+<?php include_once(SHARED_PATH . "/footer.php"); ?>

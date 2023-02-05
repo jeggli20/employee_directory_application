@@ -1,4 +1,9 @@
-<?php require_once("../../private/initialize.php"); ?>
+<?php 
+require_once("../../private/initialize.php"); 
+require_login();
+$styles_path = "/stylesheets/crud.css"; 
+$script_path = "/scripts/delete.js";
+?>
 
 <?php
 $id = $_GET["id"];
@@ -18,23 +23,24 @@ if(post_request()) {
 
 <?php
 $page_title = "Company Directory - Delete Employee";
-$script_path = "";
-$stylesheet_path = "/stylesheets/index.css"; 
-include_once(SHARED_PATH . "/public_header.php"); 
+include_once(SHARED_PATH . "/header.php"); 
 ?>
 
 <main>
     <div class="crud-content">
         <div class="crud-heading">
-            <a href="<?php echo url_for("/index.php?id=" . url($id)); ?>">&laquo; Back</a>
+            <a class="back-link" href="<?php echo url_for("/index.php?id=" . url($id)); ?>">&laquo; Back</a>
             <h2>Delete Employee</h2>
+            <div class="filler"></div> 
         </div>
-        <p>Are you sure you want to delete <?php echo $employee->full_name(); ?></p>
-        <form action="<?php echo url_for("/employee/delete.php?id=" . url($id)); ?>" method="POST">  
+        <form class="delete-form" action="<?php echo url_for("/employee/delete.php?id=" . url($id)); ?>" method="POST">  
+        <p class="delete-text">Are you sure you want to delete <?php echo $employee->full_name(); ?></p>
+        <div class="btns">
             <button class="delete-btn" type="submit">Yes</button>  
-            <a class="delete-btn" href="<?php echo url_for("/index.php?id=" . url($id)); ?>">No</a>         
+            <a class="delete-btn" href="<?php echo url_for("/index.php?id=" . url($id)); ?>" type="button"><div>No</div></a>        
+        </div>
         </form>
     </div>
 </main>
 
-<?php include_once(SHARED_PATH . "/public_footer.php"); ?>
+<?php include_once(SHARED_PATH . "/footer.php"); ?>

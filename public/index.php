@@ -1,7 +1,13 @@
-<?php require_once("../private/initialize.php"); ?>
+<?php 
+require_once("../private/initialize.php"); 
+require_login();
+$script_path = "/scripts/index.js";
+$styles_path = "/stylesheets/index.css";
+?>
 
 <?php
 $employees = Employee::select_all(["sort" => "first_name"]);
+$jobs = Job::select_all(["sort" => "job_title"]);
 
 $id = $_GET["id"] ?? "1";
 if($id == NULL) {
@@ -15,31 +21,30 @@ $employee_info = Employee::select_by_id($id);
 $page_title = "Company Directory";
 $script_path = "/scripts/index.js";
 $stylesheet_path = "/stylesheets/index.css"; 
-include_once(SHARED_PATH . "/public_header.php"); 
+include_once(SHARED_PATH . "/header.php"); 
 ?>
 
 <main class="main-content">
     <div class="search">
-        <div class="search-tools">
-            <label for="sort">Sort:</label>
-            <select id="sort" name="sort">
-                <option value="a-z">A-Z</option>
-                <option value="z-a">Z-A</option>
-            </select>
+        <div class="search-tool">
             <input id="searchbar" type="search" name="search" placeholder="Search..." />
         </div>
         <div class="employee-list-container">
             <ul class="employee-list">
                 <?php
                 if($session->job_id === "3") {
-                    echo "<a href='" . url_for("/employee/new.php") . "'><li>+ New Employee</li></a>";
+                    echo "<a class='new-link' href='" . url_for("/employee/new.php") . "'><li>+ New Employee</li></a>";
                 }
                 ?>
                 <?php
                 foreach($employees as $employee) {
-                    echo "<a class='employee-link'  href='" . url_for("/index.php?id=" . $employee->id) . "'><li class='employee'><img class='list-photo' src='./images/placeholder_profile.png' alt='Employee photo' />" . html($employee->full_name());
+                    echo "<a class='employee-link'  href='" . url_for("/index.php?id=" . $employee->id) . "'><li class='employee ";
+                    if($id === $employee->id) {
+                        echo "current-employee";
+                    }
+                    echo "'><div class='employee-identity'><img class='list-photo' src='./images/placeholder_profile.png' alt='Employee photo' />" . html($employee->full_name());
                     if($session->compare_id($employee->id)) {
-                        echo "<span class='user-indicator'>You</span>";
+                        echo "</div><span class='user-indicator'>Me</span>";
                     }
                     echo "</li></a>";
                 }
@@ -51,36 +56,33 @@ include_once(SHARED_PATH . "/public_header.php");
         <div class="information">
             <div class="basic-info">
                 <img class="employee-photo" src="./images/placeholder_profile.png" alt="Employee photo" />
-                <div>
+                <div class="list-container">
                     <ul class="basic-list">
-                        <li class="list-item">Name: <?php echo html($employee_info->full_name()); ?></li>
-                        <li class="list-item">Birthday: <?php echo html($employee_info->date_formatter("birthday")); ?></li>
-                        <li class="list-item">First Employed: <?php echo html($employee_info->date_formatter("date_started")); ?></li>
-                        <li class="list-item">Time Employed: <?php echo html($employee_info->date_formatter("time_employed")); ?></li>
+                        <li class="list-item">Name:<span class="info"><?php echo html($employee_info->full_name()); ?></span></li>
+                        <li class="list-item">Birthday:<span class="info"><?php echo html($employee_info->date_formatter("birthday")); ?></span></li>
+                        <li class="list-item">First Employed:<span class="info"><?php echo html($employee_info->date_formatter("date_started")); ?></span></li>
+                        <li class="list-item">Time Employed:<span class="info"><?php echo html($employee_info->date_formatter("time_employed")); ?></span></li>
                     </ul>
                 </div>
             </div>
             <div class="extra-info">
-                <button class="extra-btn" type="button">Title: <?php echo html($employee_info->id_to_string("job")); ?></button>
-                <a class="extra-btn" href="<?php echo url_for('/index.php?id=' . ($employee_info->supervisor_id ?? $employee_info->id)); ?>">Reports To: <?php echo html($employee_info->id_to_string("supervisor")); ?></a>
+                <div class="extra-btn-disabled">Title:<span class="info"><?php echo html($employee_info->id_to_string("job")); ?></span></div>
+                <a class="extra-btn" href="<?php echo url_for('/index.php?id=' . ($employee_info->supervisor_id ?? $employee_info->id)); ?>">Reports To:<span class="info"><?php echo html($employee_info->id_to_string("supervisor")); ?></span></a>
             </div>
             <div class="extra-info">
-                <a class="extra-btn" href="tel:<?php echo $employee_info->phone_number_formatter()["numbers"]; ?>">Phone: <?php echo html($employee_info->phone_number_formatter()["display"]); ?></a>
-                <a class="extra-btn" href="mailto:example@gmail.com">Email: <?php echo html($employee_info->email); ?></a>
+                <a class="extra-btn" href="tel:<?php echo $employee_info->phone_number_formatter()["numbers"]; ?>">Phone:<span class="info"><?php echo html($employee_info->phone_number_formatter()["display"]); ?></span></a>
+                <a class="extra-btn" href="mailto:example@gmail.com">Email:<span class="info"><?php echo html($employee_info->email); ?></span></a>
             </div>
         </div>
-        <div>
-            <?php
-            if($session->job_id === "3") {
-                echo "<div>";
-                echo "<a type='button' href='" . url_for("/employee/edit.php?id=" . url($employee_info->id)) . "'>Edit Employee</a>";
-                echo "<a type='button' href='" . url_for("/employee/delete.php?id=" . url($employee_info->id)) . "'>Delete Employee</a>";
-                echo "</div>";
-            }
-            ?>
-            <img class="company-logo" src="<?php echo url_for("/images/placeholder_logo.png"); ?>" alt="Company logo" />
-        </div>
+        <?php
+        if($session->job_id === "3") {
+            echo "<div class='crud-links'>";
+            echo "<a class='crud-link' type='button' href='" . url_for("/employee/edit.php?id=" . url($employee_info->id)) . "'>Edit Employee</a>";
+            echo "<a class='crud-link' type='button' href='" . url_for("/employee/delete.php?id=" . url($employee_info->id)) . "'>Delete Employee</a>";
+            echo "</div>";
+        }
+        ?>
     </div>
 </main>
 
-<?php include_once(SHARED_PATH . "/public_footer.php"); ?>
+<?php include_once(SHARED_PATH . "/footer.php"); ?>

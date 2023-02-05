@@ -27,4 +27,11 @@ function html(?string $string=""): string {
 function url(string $string=""): string {
     return urlencode($string);
 }
+
+function require_login() {
+    global $session;
+    if(!$session->is_logged_in()) {
+        redirect_to("/login.php");
+    }
+}
 ?>

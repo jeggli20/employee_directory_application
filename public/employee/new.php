@@ -1,4 +1,8 @@
-<?php require_once("../../private/initialize.php"); ?>
+<?php 
+require_once("../../private/initialize.php"); 
+require_login();
+$styles_path = "/stylesheets/crud.css";
+?>
 
 <?php
 $form_info = $_POST["employee"] ?? [];
@@ -14,34 +18,22 @@ if(post_request()) {
 ?>
 
 <?php
-$page_title = "Company Directory - New Employee";
-$script_path = "";
-$stylesheet_path = "/stylesheets/index.css"; 
-include_once(SHARED_PATH . "/public_header.php"); 
+$page_title = "Company Directory - New Employee"; 
+include_once(SHARED_PATH . "/header.php"); 
 ?>
 
 <main>
-    <?php
-    if(!empty($employee->errors)) {
-        echo "<div class='errors-container'>";
-        echo "<ul class='errors-list'>";
-        foreach($employee->errors as $error) {
-            echo "<li class='error'>" . $error . "</li>";
-        }
-        echo "</ul>";
-        echo "</div>";
-    }
-    ?>
     <div class="crud-content">
         <div class="crud-heading">
-            <a href="<?php echo url_for("/index.php"); ?>">&laquo; Back</a>
+            <a class="back-link" href="<?php echo url_for("/index.php"); ?>">&laquo; Back</a>
             <h2>New Employee</h2>
+            <div class="filler"></div> 
         </div>
         <form action="<?php echo url_for("/employee/new.php"); ?>" method="POST">
             <?php include_once(SHARED_PATH . "/form_fields.php"); ?>   
-            <button type="submit">Submit</button>           
+            <button class="btn" type="submit">Submit</button>           
         </form>
     </div>
 </main>
 
-<?php include_once(SHARED_PATH . "/public_footer.php"); ?>
+<?php include_once(SHARED_PATH . "/footer.php"); ?>

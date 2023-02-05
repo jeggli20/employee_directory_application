@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+  font-family: "Heebo", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  height: 85vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display SC", serif !important;
+}
+
+img {
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.info {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.btn {
+  margin: 0.5rem 0.5rem 1.5rem 0.5rem;
+  width: 150px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* =================== Header ============= */
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: #4d4d4d;
+  padding: 0.5rem;
+  height: 10vh;
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 80%;
+  align-items: center;
+}
+
+.heading h1,
+.heading h2,
+.heading span,
+.user-text span,
+.user-text a {
+  color: #fff;
+  text-shadow: 2px 2px #000;
+}
+
+.heading h1,
+.heading h2 {
+  margin: 0 0.5rem;
+}
+
+.heading h1,
+.heading span {
+  font-size: 2.5rem;
+}
+
+.heading h2 {
+  padding-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.heading span {
+  margin-bottom: 0.5rem;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 20%;
+  justify-content: end;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+}
+
+.user-text span {
+  text-align: end;
+}
+
+.user-text a:link {
+  text-decoration: none;
+}
+
+.user-text a:hover {
+  text-shadow: 2px 2px #000;
+  color: #737373 !important;
+  font-weight: bold;
+}
+
+.user-text a:visited {
+  color: #fff;
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+}
+
+/* =================== Footer ============= */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4d4d4d;
+  padding: 0.5rem;
+  height: 5vh;
+  color: #fff;
+}
+
+/* =================== Errors =================== */
+
+.errors-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 1rem;
+  padding: 0.25rem;
+  background-color: hsl(0, 100%, 90%);
+  border-radius: 20px;
+  /* width: 80%; */
+}
+
+.errors-list {
+  margin: 0;
+}
+
+.error {
+  color: hsl(0, 100%, 50%);
+  font-size: 0.9rem;
+  /* float: left; */
+  margin: 0 1.5rem;
+}
+
+.invalid {
+  background-color: hsl(0, 100%, 90%);
+  color: #000;
+  border: 2px solid hsl(0, 100%, 50%);
+}
+
+.hidden {
+  display: none;
+}

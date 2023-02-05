@@ -1,0 +1,162 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =================== CRUD =================== */
+.crud-content {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 85%;
+  background-color: #4d4d4d;
+  border: ridge 5px #737373;
+  border-radius: 20px;
+  padding-bottom: 2rem;
+}
+
+.back-link {
+  color: #fff;
+  grid-area: back;
+  padding-left: 1rem;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: #737373;
+}
+
+.filler {
+  grid-area: filler;
+}
+
+.crud-heading {
+  align-items: center;
+  display: grid;
+  grid-template: "back header filler" 100% / 1fr 2fr 1fr;
+  height: 15%;
+}
+
+.crud-heading h2 {
+  color: #fff;
+  grid-area: header;
+  text-align: center;
+}
+
+.crud-content form,
+.show-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85%;
+  overflow-y: auto;
+  overflow-x: none;
+  border-bottom: ridge 5px #4d4d4d;
+  border-top: ridge 5px #4d4d4d;
+  background-color: #737373;
+}
+
+/* =================== Form Fields =================== */
+h3,
+label {
+  color: #fff;
+}
+
+h3 {
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.form-group,
+.input-group,
+.input-group-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  align-items: center;
+  width: 80%;
+  background-color: #4d4d4d;
+  margin: 0.5rem 0;
+  border-radius: 20px;
+  border: ridge 5px #4d4d4d;
+  padding: 0.25rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 1rem;
+  justify-content: space-evenly;
+}
+
+.input-group {
+  width: 45%;
+}
+
+.input-group-row {
+  width: 93%;
+}
+
+.show-list {
+  list-style-type: none;
+  padding: 1rem 0;
+}
+
+.show-list li {
+  color: #fff;
+  margin: auto;
+  width: 250px;
+}
+
+.show-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.delete-text {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+}
+
+.btns a {
+  text-decoration: none;
+}
+
+.delete-btn {
+  align-items: center;
+  background-color: #fff;
+  border: solid 2px #000;
+  border-radius: 20px;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  height: 50px;
+  justify-content: center;
+  margin: 0.5rem 0.5rem 1.5rem 0.5rem;
+  width: 300px;
+}
+
+.delete-btn:hover,
+.delete-btn:focus {
+  background-color: #000;
+  color: #fff;
+}
