@@ -150,73 +150,73 @@ class Employee extends DatabaseObject {
         $this->errors = [];
 
         if(is_blank($this->first_name)) {
-            $this->errors[] = "First name cannot be blank";
+            $this->errors["first_name"] = "First name cannot be blank";
         } elseif(has_length_greater_than($this->first_name, 255)) {
-            $this->errors[] = "First name cannot exceed 255 characters";
+            $this->errors["first_name"] = "First name cannot exceed 255 characters";
         }
 
         if(is_blank($this->last_name)) {
-            $this->errors[] = "Last name cannot be blank";
+            $this->errors["last_name"] = "Last name cannot be blank";
         } elseif(has_length_greater_than($this->last_name, 255)) {
-            $this->errors[] = "Last name cannot exceed 255 characters";
+            $this->errors["last_name"] = "Last name cannot exceed 255 characters";
         }
 
         if(is_blank($this->username)) {
-            $this->errors[] = "Username cannot be blank";
+            $this->errors["username"] = "Username cannot be blank";
         } elseif(has_length_greater_than($this->username, 255)) {
-            $this->errors[] = "Username cannot exceed 255 characters";
+            $this->errors["username"] = "Username cannot exceed 255 characters";
         } elseif(!has_unique_username($this->username, $this->id ?? "0")) {
-            $this->errors[] = "Username already taken";
+            $this->errors["username"] = "Username already taken";
         }
 
         if($this->password_required) {
             if(is_blank($this->password)) {
-                $this->errors[] = "Password cannot be blank";
+                $this->errors["password"] = "Password cannot be blank";
             } elseif(!has_length($this->password, ["min"=>12])) {
-                $this->errors[] = "Password must be at least 12 characters long";
+                $this->errors["password"] = "Password must be at least 12 characters long";
             } elseif (!preg_match('/[A-Z]/', $this->password)) {
-                $this->errors[] = "Password must contain at least 1 uppercase letter";
+                $this->errors["password"] = "Password must contain at least 1 uppercase letter";
             } elseif (!preg_match('/[a-z]/', $this->password)) {
-                $this->errors[] = "Password must contain at least 1 lowercase letter";
+                $this->errors["password"] = "Password must contain at least 1 lowercase letter";
             } elseif (!preg_match('/[0-9]/', $this->password)) {
-                $this->errors[] = "Password must contain at least 1 number";
+                $this->errors["password"] = "Password must contain at least 1 number";
             } elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->password)) {
-                $this->errors[] = "Password must contain at least 1 special character";
+                $this->errors["password"] = "Password must contain at least 1 special character";
             }
     
             if(is_blank($this->c_password)) {
-                $this->errors[] = "Confirm Password cannot be blank";
+                $this->errors["c_password"] = "Confirm Password cannot be blank";
             } elseif($this->password !== $this->c_password) {
-                $this->errors[] = "Password and Confirm Password must match";
+                $this->errors["c_password"] = "Password and Confirm Password must match";
             }
         }
 
         if(is_blank($this->email)) {
-            $this->errors[] = "Email cannot be blank.";
+            $this->errors["email"] = "Email cannot be blank.";
         } elseif (has_length_greater_than($this->email, 255)) {
-            $this->errors[] = "Last name must be less than 255 characters.";
+            $this->errors["email"] = "Last name must be less than 255 characters.";
         } elseif (!has_valid_email_format($this->email)) {
-            $this->errors[] = "Email must be a valid format.";
+            $this->errors["email"] = "Email must be a valid format.";
         }
         
         $phone_number = $this->phone_number_formatter()["numbers"];
         if(is_blank($phone_number)) {
-            $this->errors[] = "Phone number cannot be blank";
+            $this->errors["phone_number"] = "Phone number cannot be blank";
         } elseif (!has_length_exactly($phone_number, 10)) {
-            $this-> errors[] = "Phone number should be 10 digits long (###-###-####)";
+            $this-> errors["phone_number"] = "Phone number should be 10 digits long (###-###-####)";
         }
 
         $birthday = $this->date_array($this->birthday);
         if(!is_blank($this->birthday)) {
             if(!has_valid_date($birthday)) {
-                $this->errors[] = "Please enter in a valid birthday";
+                $this->errors["birthday"] = "Please enter in a valid birthday";
             }
         }
 
         $started = $this->date_array($this->date_started);
         if(!is_blank($this->date_started)) {
             if(!has_valid_date($started)) {
-                $this->errors[] = "Please enter in a valid start date";
+                $this->errors["date_started"] = "Please enter in a valid start date";
             }
         }
     }

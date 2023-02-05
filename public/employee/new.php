@@ -2,6 +2,7 @@
 require_once("../../private/initialize.php"); 
 require_login();
 $styles_path = "/stylesheets/crud.css";
+$script_paths = ["/scripts/validate.js"]
 ?>
 
 <?php

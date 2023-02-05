@@ -1,7 +1,7 @@
 <?php 
 require_once("../../private/initialize.php"); 
 require_login();
-$script_path = "/scripts/edit.js";
+$script_paths = ["/scripts/edit.js", "/scripts/validate.js"];
 $styles_path = "/stylesheets/crud.css";
 ?>
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 class DatabaseObject {
     public $errors = [];
+    public $classes = [];
 
     protected static $database;
     protected static $table = "";

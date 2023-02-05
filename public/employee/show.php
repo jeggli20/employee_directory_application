@@ -19,17 +19,6 @@ include_once(SHARED_PATH . "/header.php");
 ?>
 
 <main>
-    <?php
-    if(!empty($employee->errors)) {
-        echo "<div class='errors-container'>";
-        echo "<ul class='errors-list'>";
-        foreach($employee->errors as $error) {
-            echo "<li class='error'>" . $error . "</li>";
-        }
-        echo "</ul>";
-        echo "</div>";
-    }
-    ?>
     <div class="crud-content">
         <div class="crud-heading">
             <a class="back-link" href="<?php echo url_for("/index.php?id=" . url($employee_info->id)); ?>">&laquo; Back</a>

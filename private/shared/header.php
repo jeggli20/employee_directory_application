@@ -1,3 +1,5 @@
+<?php $script_paths ?? []; ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,8 +8,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $page_title; ?></title>
         <?php
-        if(isset($script_path)) {
-            echo "<script defer src=" . url_for($script_path) . "></script>"; 
+        if(!empty($script_paths)) {
+            foreach($script_paths as $script_path) {
+                echo "<script defer src=" . url_for($script_path) . "></script>"; 
+            }
         }
         ?>
         <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,10 +1,9 @@
 <?php 
 require_once("../private/initialize.php"); 
+
+// Page variables
 $script_path = "/scripts/login.js";
 $styles_path = "/stylesheets/login.css";
-?>
-
-<?php
 $page_title = "Company Directory - Login";
 $username= "";
 $password = "";

@@ -20,17 +20,17 @@ $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
     <div class="form-row">
         <div class="input-group">
             <label for="first_name">First Name:</label>
-            <input type="text" name="employee[first_name]" id="first_name" placeholder="John" value="<?php echo $employee->first_name ?? "" ?>" />
+            <input class="<?php if(isset($employee->errors['first_name'])) echo 'invalid'; ?>" type="text" name="employee[first_name]" id="first_name" placeholder="John" value="<?php echo $employee->first_name ?? "" ?>" />
         </div>
         <div class="input-group">
             <label for="last_name">Last Name:</label>
-            <input type="text" name="employee[last_name]" id="last_name" placeholder="Smith" value="<?php echo $employee->last_name ?? "" ?>" />
+            <input class="<?php if(isset($employee->errors['last_name'])) echo 'invalid'; ?>" type="text" name="employee[last_name]" id="last_name" placeholder="Smith" value="<?php echo $employee->last_name ?? "" ?>" />
         </div>
     </div>
     <div class="form-row">
         <div class="input-group-row">
             <label for="username">Username:</label>
-            <input type="text" name="employee[username]" id="username" placeholder="johnsmith" value="<?php echo $employee->username ?? "" ?>" />
+            <input class="<?php if(isset($employee->errors['username'])) echo 'invalid'; ?>" type="text" name="employee[username]" id="username" placeholder="johnsmith" value="<?php echo $employee->username ?? "" ?>" />
         </div>
     </div>
     <?php
@@ -38,24 +38,40 @@ $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
             echo "<div class='form-row'>";
             echo    "<div class='input-group'>";
             echo        "<label for='password'>Password:</label>";
-            echo        "<input type='password' name='employee[password]' id='password' placeholder='Password' />";
+            if(isset($employee->errors['password'])) {
+                echo    "<input class='invalid' type='password' name='employee[password]' id='password' placeholder='Password' />";
+            } else {
+                echo    "<input type='password' name='employee[password]' id='password' placeholder='Password' />";
+
+            }
             echo    "</div>";
             echo    "<div class='input-group'>";
             echo        "<label for='c_password'>Confirm Password:</label>";
-            echo        "<input type='password' name='employee[c_password]' id='c_password' placeholder='Confirm Password' />";
-            echo    "</div>";
+            if(isset($employee->errors['c_password'])) {
+                echo    "<input class='invalid' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+            } else {
+                echo    "<input type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+
+            }            echo    "</div>";
             echo "</div>";
         } else {
             echo "<button class='btn' id='password-btn' type='button'>Change Password?</button>";
             echo "<div class='form-row'>";
             echo    "<div class='input-group'>";
             echo        "<label for='password' class='edit-password'>Password:</label>";
-            echo        "<input type='password' name='employee[password]' id='password' class='edit-password' placeholder='Password' />";
+            if(isset($employee->errors['password'])) {
+                echo    "<input class='invalid edit-password' type='password' name='employee[password]' id='password' placeholder='Password' />";
+            } else {
+                echo    "<input class='edit-password' type='password' name='employee[password]' id='password' placeholder='Password' />";
+            }
             echo    "</div>";
             echo    "<div class='input-group'>";
             echo        "<label for='c_password' class='edit-password'>Confirm Password:</label>";
-            echo        "<input type='password' name='employee[c_password]' id='c_password' class='edit-password' placeholder='Confirm Password' />";
-            echo    "</div>";
+            if(isset($employee->errors['password'])) {
+                echo    "<input class='invalid edit-password' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+            } else {
+                echo    "<input class='edit-password' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+            }            echo    "</div>";
             echo "</div>";
         }
     ?>  
@@ -65,11 +81,11 @@ $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
     <div class="form-row">
         <div class="input-group">
             <label for="email">Email:</label>
-            <input type="email" name="employee[email]" id="email" placeholder="johnsmith@gmail.com" value="<?php echo $employee->email ?? "" ?>" />
+            <input class="<?php if(isset($employee->errors['email'])) echo 'invalid'; ?>" type="email" name="employee[email]" id="email" placeholder="johnsmith@gmail.com" value="<?php echo $employee->email ?? "" ?>" />
         </div>
         <div class="input-group">
             <label for="phone_number">Phone Number:</label>
-            <input type="text" name="employee[phone_number]" id="phone_number" placeholder="###-###-####" value="<?php echo $employee->phone_number ?? "" ?>" />
+            <input class="<?php if(isset($employee->errors['phone_number'])) echo 'invalid'; ?>" type="text" name="employee[phone_number]" id="phone_number" placeholder="###-###-####" value="<?php echo $employee->phone_number ?? "" ?>" />
         </div>
     </div>
 </div>
@@ -112,11 +128,11 @@ $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
     <div class="form-row">
         <div class="input-group">
             <label for="birthday">Birthday:</label>
-            <input type="date" name="employee[birthday]" id="birthday" value="<?php echo $employee->birthday ?? "" ?>" />
+            <input class="<?php if(isset($employee->errors['birthday'])) echo 'invalid'; ?>" type="date" name="employee[birthday]" id="birthday" value="<?php echo $employee->birthday ?? "" ?>" />
         </div>
         <div class="input-group">
             <label for="date_started">Date Started:</label>
-            <input type="date" name="employee[date_started]" id="date_started" value="<?php echo (string) $employee->date_started ?? ""; ?>" />  
+            <input class="<?php if(isset($employee->errors['date_started'])) echo 'invalid'; ?>" type="date" name="employee[date_started]" id="date_started" value="<?php echo (string) $employee->date_started ?? ""; ?>" />  
         </div>
     </div>
 </div>
