@@ -3,3 +3,5 @@
         </footer>
     </body>
 </html>
+
+<?php db_close($database); ?>

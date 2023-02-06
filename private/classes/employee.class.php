@@ -146,6 +146,22 @@ class Employee extends DatabaseObject {
         }
     }
 
+    public function insert_into(): bool {
+        $this->set_hashed_password();
+        $this->time_employed_days = $this->days_worked();
+        return parent::insert_into();
+    }
+
+    public function update(): bool {
+        if($this->password !== "") {
+        $this->set_hashed_password();
+        } else {
+        $this->password_required = false;
+        }
+        $this->time_employed_days = $this->days_worked();
+        return parent::update();
+    }
+
     protected function validate() {
         $this->errors = [];
 
@@ -219,22 +235,6 @@ class Employee extends DatabaseObject {
                 $this->errors["date_started"] = "Please enter in a valid start date";
             }
         }
-    }
-
-    public function insert_into(): bool {
-        $this->set_hashed_password();
-        $this->time_employed_days = $this->days_worked();
-        return parent::insert_into();
-    }
-
-    public function update(): bool {
-        if($this->password !== "") {
-        $this->set_hashed_password();
-        } else {
-        $this->password_required = false;
-        }
-        $this->time_employed_days = $this->days_worked();
-        return parent::update();
     }
 }
 ?>

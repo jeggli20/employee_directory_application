@@ -19,8 +19,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Heebo&family=Playfair+Display+SC:wght@700&display=swap" rel="stylesheet">
         <link href="<?php echo url_for("stylesheets/global.css") ?>" rel="stylesheet" />
         <?php
-        if(isset($styles_path)) {
-            echo "<link href=" . url_for($styles_path) . " rel='stylesheet' />"; 
+        if(!empty($style_paths)) {
+            foreach($style_paths as $style_path) {
+                echo "<link href=" . url_for($style_path) . " rel='stylesheet' />";
+            }
         }
         ?>
     </head>

@@ -83,7 +83,7 @@ class DatabaseObject {
         return $errors;
     }
 
-    public function merge_attributes($args = []) {
+    public function merge_attributes(array $args = []) {
         foreach($args as $key => $value) {
             if(property_exists($this, $key) && $value !== NULL) {
                 $this->$key = $value;

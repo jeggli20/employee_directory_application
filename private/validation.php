@@ -32,6 +32,18 @@ function has_length(string $value, array $options): bool {
     }
 }
 
+function has_valid_date(array $date): bool {
+    if ($date["year"] > date("Y") || $date["year"] < 1900) {
+        return false;
+    } elseif($date["month"] > "12" || $date["month"] < "1") {
+        return false;
+    } elseif($date["day"] > "31" || $date["day"] < "1") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function has_valid_email_format(string $value): bool {
     $email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';
     return preg_match($email_regex, $value) === 1;
@@ -46,15 +58,4 @@ function has_unique_username(string $username, string $current_id="0"): bool {
     }
 }
 
-function has_valid_date(array $date): bool {
-    if ($date["year"] > date("Y") || $date["year"] < 1900) {
-        return false;
-    } elseif($date["month"] > "12" || $date["month"] < "1") {
-        return false;
-    } elseif($date["day"] > "31" || $date["day"] < "1") {
-        return false;
-    } else {
-        return true;
-    }
-}
 ?>

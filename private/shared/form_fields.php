@@ -1,19 +1,19 @@
 <?php
+// PAge Variables
 $jobs = Job::select_all(["sort"=>"job_title"]);
 $employees = Employee::select_all(["sort"=>"first_name"]);
 $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
-?>
 
-<?php
-    if(!empty($employee->errors)) {
-        echo "<div class='errors-container'>";
-        echo "<ul class='errors-list'>";
-        foreach($employee->errors as $error) {
-            echo "<li class='error'>" . $error . "</li>";
-        }
-        echo "</ul>";
-        echo "</div>";
+// Error Display
+if(!empty($employee->errors)) {
+    echo "<div class='errors-container'>";
+    echo "<ul class='errors-list'>";
+    foreach($employee->errors as $error) {
+        echo "<li class='error'>" . $error . "</li>";
     }
+    echo "</ul>";
+    echo "</div>";
+}
 ?>
 <div class="form-group">
     <h3>Basic Information</h3>
@@ -34,46 +34,45 @@ $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);
         </div>
     </div>
     <?php
-        if($url_string === "new") {
-            echo "<div class='form-row'>";
-            echo    "<div class='input-group'>";
-            echo        "<label for='password'>Password:</label>";
-            if(isset($employee->errors['password'])) {
-                echo    "<input class='invalid' type='password' name='employee[password]' id='password' placeholder='Password' />";
-            } else {
-                echo    "<input type='password' name='employee[password]' id='password' placeholder='Password' />";
-
-            }
-            echo    "</div>";
-            echo    "<div class='input-group'>";
-            echo        "<label for='c_password'>Confirm Password:</label>";
-            if(isset($employee->errors['c_password'])) {
-                echo    "<input class='invalid' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
-            } else {
-                echo    "<input type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
-
-            }            echo    "</div>";
-            echo "</div>";
+    if($url_string === "new") {
+        echo "<div class='form-row'>";
+        echo    "<div class='input-group'>";
+        echo        "<label for='password'>Password:</label>";
+        if(isset($employee->errors['password'])) {
+            echo    "<input class='invalid' type='password' name='employee[password]' id='password' placeholder='Password' />";
         } else {
-            echo "<button class='btn' id='password-btn' type='button'>Change Password?</button>";
-            echo "<div class='form-row'>";
-            echo    "<div class='input-group'>";
-            echo        "<label for='password' class='edit-password'>Password:</label>";
-            if(isset($employee->errors['password'])) {
-                echo    "<input class='invalid edit-password' type='password' name='employee[password]' id='password' placeholder='Password' />";
-            } else {
-                echo    "<input class='edit-password' type='password' name='employee[password]' id='password' placeholder='Password' />";
-            }
-            echo    "</div>";
-            echo    "<div class='input-group'>";
-            echo        "<label for='c_password' class='edit-password'>Confirm Password:</label>";
-            if(isset($employee->errors['password'])) {
-                echo    "<input class='invalid edit-password' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
-            } else {
-                echo    "<input class='edit-password' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
-            }            echo    "</div>";
-            echo "</div>";
+            echo    "<input type='password' name='employee[password]' id='password' placeholder='Password' />";
         }
+        echo    "</div>";
+        echo    "<div class='input-group'>";
+        echo        "<label for='c_password'>Confirm Password:</label>";
+        if(isset($employee->errors['c_password'])) {
+            echo    "<input class='invalid' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+        } else {
+            echo    "<input type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+        }            
+        echo    "</div>";
+        echo "</div>";
+    } else {
+        echo "<button class='btn' id='password-btn' type='button'>Change Password?</button>";
+        echo "<div class='form-row'>";
+        echo    "<div class='input-group'>";
+        echo        "<label for='password' class='edit-password'>Password:</label>";
+        if(isset($employee->errors['password'])) {
+            echo    "<input class='invalid edit-password' type='password' name='employee[password]' id='password' placeholder='Password' />";
+        } else {
+            echo    "<input class='edit-password' type='password' name='employee[password]' id='password' placeholder='Password' />";
+        }
+        echo    "</div>";
+        echo    "<div class='input-group'>";
+        echo        "<label for='c_password' class='edit-password'>Confirm Password:</label>";
+        if(isset($employee->errors['password'])) {
+            echo    "<input class='invalid edit-password' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+        } else {
+            echo    "<input class='edit-password' type='password' name='employee[c_password]' id='password' placeholder='Confirm Password' />";
+        }            echo    "</div>";
+        echo "</div>";
+    }
     ?>  
 </div>
 <div class="form-group">

@@ -1,35 +1,53 @@
+/*? ========== Color ========== */
+:root {
+  --primary-color: #4d4d4d;
+  --secondary-color: #737373;
+  --tertiary-color: #fff;
+  --accent-color: #000;
+}
+
+/* ===== General ===== */
 main {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
-/* =================== CRUD =================== */
-.crud-content {
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  height: 85%;
-  background-color: #4d4d4d;
-  border: ridge 5px #737373;
-  border-radius: 20px;
-  padding-bottom: 2rem;
-}
-
+/** ========== CRUD ========== */
 .back-link {
-  color: #fff;
+  color: var(--tertiary-color);
   grid-area: back;
   padding-left: 1rem;
   text-decoration: none;
 }
 
 .back-link:hover {
-  color: #737373;
+  color: var(--secondary-color);
 }
 
-.filler {
-  grid-area: filler;
+.crud-content {
+  background-color: var(--primary-color);
+  border: ridge 5px var(--secondary-color);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  padding-bottom: 2rem;
+  width: 60%;
+}
+
+.crud-content form,
+.show-list {
+  align-items: center;
+  background-color: var(--secondary-color);
+  border-bottom: ridge 5px var(--primary-color);
+  border-top: ridge 5px var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  overflow-x: none;
+  overflow-y: auto;
 }
 
 .crud-heading {
@@ -40,30 +58,16 @@ main {
 }
 
 .crud-heading h2 {
-  color: #fff;
+  color: var(--tertiary-color);
   grid-area: header;
   text-align: center;
 }
 
-.crud-content form,
-.show-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 85%;
-  overflow-y: auto;
-  overflow-x: none;
-  border-bottom: ridge 5px #4d4d4d;
-  border-top: ridge 5px #4d4d4d;
-  background-color: #737373;
+.filler {
+  grid-area: filler;
 }
 
 /* =================== Form Fields =================== */
-h3,
-label {
-  color: #fff;
-}
-
 h3 {
   margin: 0.25rem 0 0.5rem 0;
 }
@@ -77,20 +81,20 @@ h3 {
 
 .form-group {
   align-items: center;
-  width: 80%;
-  background-color: #4d4d4d;
-  margin: 0.5rem 0;
+  background-color: var(--primary-color);
+  border: ridge 5px var(--primary-color);
   border-radius: 20px;
-  border: ridge 5px #4d4d4d;
+  margin: 0.5rem 0;
   padding: 0.25rem;
+  width: 80%;
 }
 
 .form-row {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  margin-bottom: 1rem;
   justify-content: space-evenly;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .input-group {
@@ -107,7 +111,7 @@ h3 {
 }
 
 .show-list li {
-  color: #fff;
+  color: var(--tertiary-color);
   margin: auto;
   width: 250px;
 }
@@ -126,7 +130,7 @@ h3 {
 }
 
 .delete-text {
-  color: #fff;
+  color: var(--tertiary-color);
   font-size: 2rem;
   font-weight: bolder;
 }
@@ -142,10 +146,10 @@ h3 {
 
 .delete-btn {
   align-items: center;
-  background-color: #fff;
-  border: solid 2px #000;
+  background-color: var(--tertiary-color);
+  border: solid 2px var(--accent-color);
   border-radius: 20px;
-  color: #000;
+  color: var(--accent-color);
   cursor: pointer;
   display: flex;
   font-size: 16px;
@@ -157,6 +161,6 @@ h3 {
 
 .delete-btn:hover,
 .delete-btn:focus {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--accent-color);
+  color: var(--tertiary-color);
 }
