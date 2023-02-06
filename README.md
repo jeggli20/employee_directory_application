@@ -12,9 +12,8 @@ This application template can help you get a head start on an employee directory
 
 ### Database
 
-1. Create an SQL driven database
-2. Import the SQL file to your database
-3. Create a db_credentials.php file with the following defined variables:
+1. Import the SQL file to your database
+2. Create a db_credentials.php file with the following defined variables:
    - DB_HOST
    - DB_USER
    - DB_PASS
