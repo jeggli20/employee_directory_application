@@ -40,7 +40,7 @@
                 echo        "<span>Welcome, " . html($user) . "</span>";
                 echo        "<a href=" . url_for("/logout.php") . ">Logout</a>";
                 echo    "</div>";
-                echo    "<img class='user-photo' src=" . url_for("/images/placeholder_profile.png") . " alt='Employee photo' />";
+                echo    "<img class='user-photo' src='" . url_for("/images/employees/thumb/thumb" . "_placeholder_profile" . ".png") . "' alt='Employee photo' />";
                 echo "</div>";
             }
             ?>

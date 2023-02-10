@@ -19,7 +19,7 @@ if(post_request()) {
 }
 ?>
 
-// Page Content
+<!-- Page Content -->
 <?php include_once(SHARED_PATH . "/header.php"); ?>
     <main>
         <div class="crud-content">

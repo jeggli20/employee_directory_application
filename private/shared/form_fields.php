@@ -1,5 +1,5 @@
 <?php
-// PAge Variables
+// Page Variables
 $jobs = Job::select_all(["sort"=>"job_title"]);
 $employees = Employee::select_all(["sort"=>"first_name"]);
 $url_string = substr($_SERVER["REQUEST_URI"], 69, 3);

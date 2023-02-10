@@ -2,8 +2,9 @@
 :root {
   --primary-color: #4d4d4d;
   --secondary-color: #737373;
-  --tertiary-color: #fff;
-  --accent-color: #000;
+  --tertiary-color: #929292;
+  --light-accent: #fff;
+  --dark-accent: #000;
 }
 
 /* ===== General ===== */
@@ -30,8 +31,8 @@ main {
 
 /* ===== Classes ===== */
 .container {
-  background-color: var(--secondary-color);
-  border: ridge 5px var(--primary-color);
+  background-color: var(--primary-color);
+  border: ridge 5px var(--secondary-color);
   border-radius: 20px;
   min-height: 260px;
   width: 500px;
@@ -65,9 +66,9 @@ main {
 }
 
 .user-text {
-  color: var(--tertiary-color);
+  color: var(--light-accent);
 }
 
 .user-text a:visited {
-  color: var(--tertiary-color);
+  color: var(--light-accent);
 }

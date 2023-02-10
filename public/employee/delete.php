@@ -22,7 +22,7 @@ if(post_request()) {
 }
 ?>
 
-// Page Content
+<!-- Page Content -->
 <?php include_once(SHARED_PATH . "/header.php"); ?>
     <main>
         <div class="crud-content">
@@ -32,7 +32,7 @@ if(post_request()) {
                 <div class="filler"></div> 
             </div>
             <form class="delete-form" action="<?php echo url_for("/employee/delete.php?id=" . url($id)); ?>" method="POST">  
-            <p class="delete-text">Are you sure you want to delete <?php echo $employee->full_name(); ?></p>
+            <p class="delete-text">Are you sure you want to delete <?php echo $employee->full_name(); ?>?</p>
             <div class="btns">
                 <button class="delete-btn" type="submit">Yes</button>  
                 <a class="delete-btn" href="<?php echo url_for("/index.php?id=" . url($id)); ?>" type="button"><div>No</div></a>        

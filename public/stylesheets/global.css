@@ -2,8 +2,9 @@
 :root {
   --primary-color: #4d4d4d;
   --secondary-color: #737373;
-  --tertiary-color: #fff;
-  --accent-color: #000;
+  --tertiary-color: #929292;
+  --light-accent: #fff;
+  --dark-accent: #000;
 }
 
 /** ========== Global ========== */
@@ -20,7 +21,7 @@ body {
 h1,
 h2,
 h3 {
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
   font-family: "Playfair Display SC", serif !important;
 }
 
@@ -29,14 +30,15 @@ img {
 }
 
 input {
-  background-color: var(--tertiary-color);
-  border: 2px solid var(--accent-color);
+  background-color: var(--light-accent);
+  border: 2px solid var(--secondary-color);
   border-radius: 20px;
   padding: 0 1rem;
 }
 
 label {
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 main {
@@ -48,14 +50,16 @@ main {
 .btn {
   margin: 0.5rem 0.5rem 1.5rem 0.5rem;
   width: 150px;
+  background-color: var(--light-accent);
   border-radius: 20px;
+  color: var(--dark-accent);
   cursor: pointer;
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: var(--accent-color);
-  color: var(--tertiary-color);
+  background-color: var(--tertiary-color);
+  color: var(--dark-accent);
 }
 
 .info {
@@ -86,8 +90,8 @@ header {
 .heading span,
 .user-text span,
 .user-text a {
-  color: var(--tertiary-color);
-  text-shadow: 2px 2px var(--accent-color);
+  color: var(--secondary-color);
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 .heading h1,
@@ -124,24 +128,28 @@ header {
 }
 
 .user-text span {
+  font-weight: bolder;
   text-align: end;
 }
 
 .user-text a {
+  color: var(--secondary-color);
+  font-weight: bolder;
   text-decoration: none;
 }
 
 .user-text a:hover {
-  color: var(--secondary-color) !important;
-  font-weight: bold;
-  text-shadow: 2px 2px var(--accent-color);
+  color: var(--dark-accent) !important;
+  text-shadow: 2px 2px var(--tertiary-color);
 }
 
 .user-text a:visited {
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
 }
 
 .user-photo {
+  background-color: var(--light-accent);
+  border: 2px ridge var(--secondary-color);
   border-radius: 50%;
   height: 50px;
   margin: 0 0.5rem;
@@ -153,11 +161,16 @@ header {
 footer {
   align-items: center;
   background-color: var(--primary-color);
-  color: var(--tertiary-color);
   display: flex;
   height: 5vh;
   justify-content: center;
   padding: 0.5rem;
+}
+
+footer span {
+  color: var(--secondary-color);
+  font-weight: bolder;
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 /** ========== Errors ========== */

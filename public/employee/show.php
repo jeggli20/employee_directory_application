@@ -14,12 +14,12 @@ if($id === NULL) {
 $employee_info = Employee::select_by_id($id);
 ?>
 
-// Page Content
+<!-- Page Content -->
 <?php include_once(SHARED_PATH . "/header.php"); ?>
     <main>
         <div class="crud-content">
             <div class="crud-heading">
-                <a class="back-link" href="<?php echo url_for("/index.php?id=" . url($employee_info->id)); ?>">&laquo; Back</a>
+                <a class="back-link" href="<?php echo url_for("/index.php?id=" . url($employee_info->id)); ?>">&laquo; Home</a>
                 <h2>Employee Information</h2>
                 <div class="filler"></div> 
             </div>

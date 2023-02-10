@@ -2,8 +2,9 @@
 :root {
   --primary-color: #4d4d4d;
   --secondary-color: #737373;
-  --tertiary-color: #fff;
-  --accent-color: #000;
+  --tertiary-color: #929292;
+  --light-accent: #fff;
+  --dark-accent: #000;
 }
 
 /* ===== General ===== */
@@ -16,14 +17,16 @@ main {
 
 /** ========== CRUD ========== */
 .back-link {
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
   grid-area: back;
   padding-left: 1rem;
   text-decoration: none;
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 .back-link:hover {
-  color: var(--secondary-color);
+  color: var(--dark-accent);
+  text-shadow: 2px 2px var(--tertiary-color);
 }
 
 .crud-content {
@@ -41,8 +44,8 @@ main {
 .show-list {
   align-items: center;
   background-color: var(--secondary-color);
-  border-bottom: ridge 5px var(--primary-color);
-  border-top: ridge 5px var(--primary-color);
+  border-bottom: ridge 5px var(--secondary-color);
+  border-top: ridge 5px var(--secondary-color);
   display: flex;
   flex-direction: column;
   height: 85%;
@@ -58,9 +61,9 @@ main {
 }
 
 .crud-heading h2 {
-  color: var(--tertiary-color);
   grid-area: header;
   text-align: center;
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 .filler {
@@ -70,6 +73,7 @@ main {
 /* =================== Form Fields =================== */
 h3 {
   margin: 0.25rem 0 0.5rem 0;
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 .form-group,
@@ -111,7 +115,7 @@ h3 {
 }
 
 .show-list li {
-  color: var(--tertiary-color);
+  color: var(--light-accent);
   margin: auto;
   width: 250px;
 }
@@ -146,10 +150,10 @@ h3 {
 
 .delete-btn {
   align-items: center;
-  background-color: var(--tertiary-color);
-  border: solid 2px var(--accent-color);
+  background-color: var(--light-accent);
+  border: solid 2px var(--dark-accent);
   border-radius: 20px;
-  color: var(--accent-color);
+  color: var(--dark-accent);
   cursor: pointer;
   display: flex;
   font-size: 16px;
@@ -161,6 +165,5 @@ h3 {
 
 .delete-btn:hover,
 .delete-btn:focus {
-  background-color: var(--accent-color);
-  color: var(--tertiary-color);
+  background-color: var(--tertiary-color);
 }

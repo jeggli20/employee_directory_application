@@ -17,7 +17,7 @@ if($id == NULL) {
 $employee_info = Employee::select_by_id($id);
 ?>
 
-// Page Content
+<!-- Page Content -->
 <?php include_once(SHARED_PATH . "/header.php"); ?>
     <main class="main-content">
         <div class="search">
@@ -37,7 +37,7 @@ $employee_info = Employee::select_by_id($id);
                         if($id === $employee->id) {
                             echo "current-employee";
                         }
-                        echo "'><div class='employee-identity'><img class='list-photo' src='./images/placeholder_profile.png' alt='Employee photo' />" . html($employee->full_name());
+                        echo "'><div class='employee-identity'><img class='list-photo' src='" . url_for("/images/employees/thumb/thumb" . "_placeholder_profile" . ".png") . "' alt='Employee photo' />" . html($employee->full_name());
                         if($session->compare_id($employee->id)) {
                             echo "</div><span class='user-indicator'>Me</span>";
                         }
@@ -50,7 +50,7 @@ $employee_info = Employee::select_by_id($id);
         <div class="employee-info">
             <div class="information">
                 <div class="basic-info">
-                    <img class="employee-photo" src="./images/placeholder_profile.png" alt="Employee photo" />
+                    <img class="employee-photo" src="<?php echo url_for('/images/employees/' . 'placeholder_profile' . '.png') ?>" alt="Employee photo" />
                     <div class="list-container">
                         <ul class="basic-list">
                             <li class="list-item">Name:<span class="info"><?php echo html($employee_info->full_name()); ?></span></li>

@@ -35,7 +35,7 @@ if(post_request()) {
 }
 ?>
 
-// Page Content
+<!-- Page Content -->
 <?php include_once(SHARED_PATH . "/header.php"); ?>
     <main>
         <div class="container">
@@ -43,7 +43,7 @@ if(post_request()) {
                 <img class="logo" src="<?php echo url_for("/images/placeholder_logo.png"); ?>" alt="Company Logo" />
                 <h2>Employee Directory Login</h2>
             </div>
-            // Error Display
+             <!-- Error Display -->
             <?php
             if(!empty($errors)) {
                 echo "<div class='errors-container'>";

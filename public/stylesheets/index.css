@@ -2,8 +2,9 @@
 :root {
   --primary-color: #4d4d4d;
   --secondary-color: #737373;
-  --tertiary-color: #fff;
-  --accent-color: #000;
+  --tertiary-color: #929292;
+  --light-accent: #fff;
+  --dark-accent: #000;
 }
 
 /* ===== General ===== */
@@ -15,13 +16,15 @@ main {
 /** ========== Search ========== */
 /* ===== Classes ===== */
 .current-employee {
-  background-color: var(--accent-color) !important;
+  background-color: var(--tertiary-color) !important;
+  color: var(--dark-accent) !important;
 }
 
 .employee {
   align-items: center;
   background-color: var(--secondary-color);
-  border: ridge 2px var(--secondary-color);
+  border: ridge 2px var(--primary-color);
+  color: var(--light-accent);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -30,8 +33,10 @@ main {
   width: 100%;
 }
 
-.employee:hover {
-  background-color: var(--primary-color);
+.employee:hover,
+.current-employee:hover {
+  background-color: var(--tertiary-color) !important;
+  color: var(--dark-accent) !important;
 }
 
 .employee-identity {
@@ -41,7 +46,14 @@ main {
 
 .employee-link {
   color: var(--tertiary-color);
+  display: inline-block;
   text-decoration: none;
+  width: 100%;
+}
+
+.employee-link,
+.employee-identity {
+  height: 60px;
 }
 
 .employee-list {
@@ -51,7 +63,7 @@ main {
 }
 
 .employee-list-container {
-  border-top: solid 5px var(--accent-color);
+  border-top: ridge 5px var(--secondary-color);
   height: 90%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -59,12 +71,14 @@ main {
 }
 
 .list-photo {
-  height: 20px;
+  background-color: var(--light-accent);
+  height: 40px;
   margin: 0 0.5rem;
-  width: 20px;
+  width: 40px;
 }
 
 .search {
+  background-color: var(--primary-color);
   border: ridge 5px var(--secondary-color);
   flex-basis: 20%;
   height: 100%;
@@ -85,13 +99,16 @@ main {
 .new-link li {
   background-color: var(--primary-color);
   border: ridge 2px var(--secondary-color);
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
+  font-weight: bolder;
   padding: 0.25rem 0;
   text-align: center;
+  text-shadow: 1px 1px var(--light-accent);
 }
 
 .new-link li:hover {
-  background-color: var(--accent-color);
+  background-color: var(--tertiary-color);
+  color: var(--dark-accent);
 }
 
 .user-indicator {
@@ -102,6 +119,8 @@ main {
 /* ===== id ===== */
 
 #searchbar {
+  background-color: var(--light-accent);
+  border: ridge 2px var(--dark-accent);
   border-radius: 20px;
   margin: 0.5rem 0.25rem;
   padding: 0.5rem;
@@ -134,16 +153,19 @@ main {
 .crud-link {
   background-color: var(--primary-color);
   border: ridge 5px var(--secondary-color);
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
   display: inline-block;
+  font-weight: bolder;
   padding: 0.25rem 0;
   text-align: center;
   text-decoration: none;
+  text-shadow: 1px 1px var(--light-accent);
   width: 50%;
 }
 
 .crud-link:hover {
-  background-color: var(--accent-color);
+  background-color: var(--tertiary-color);
+  color: var(--dark-accent);
 }
 
 .employee-info {
@@ -155,7 +177,7 @@ main {
 }
 
 .employee-photo {
-  border: solid 2px var(--accent-color);
+  border: ridge 5px var(--secondary-color);
   height: 250px;
   width: 250px;
 }
@@ -166,7 +188,7 @@ main {
   background-color: var(--secondary-color);
   border: 0;
   border-radius: 20px;
-  color: var(--tertiary-color);
+  color: var(--light-accent);
   display: flex;
   height: 50px;
   justify-content: center;
@@ -189,7 +211,8 @@ main {
 }
 
 .extra-btn:hover {
-  background-color: var(--primary-color);
+  background-color: var(--tertiary-color);
+  color: var(--dark-accent);
   cursor: pointer;
 }
 
@@ -214,7 +237,7 @@ main {
 }
 
 .list-item {
-  color: var(--tertiary-color);
+  color: var(--light-accent);
   font-size: 1.5rem;
   margin: 1.5rem 0;
 }
