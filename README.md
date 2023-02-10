@@ -12,14 +12,13 @@ This application template can help you get a head start on an employee directory
 
 ### Database
 
-1. Create an SQL driven database
-2. Import the SQL file to your database (The .sql file is written in MySQL, make adjustments where necessary)
-3. Create a db_credentials.php file with the following defined variables in the 'private' folder:
+1. Import the SQL file to your database (The .sql file is written in MySQL, make adjustments where necessary)
+2. Create a db_credentials.php file with the following defined variables in the 'private' folder:
    - DB_HOST
    - DB_USER
    - DB_PASS
    - DB_NAME
-4. If you plan to use employee images, you may add that column to the employees table as necessary
+3. If you plan to use employee images, you may add that column to the employees table as necessary
 
 ### Styling
 
